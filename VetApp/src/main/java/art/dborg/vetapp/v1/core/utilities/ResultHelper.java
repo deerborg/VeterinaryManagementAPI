@@ -31,4 +31,13 @@ public class ResultHelper {
     public static Result NOT_FOUND_ANIMAL(){
         return new Result(false,Message.NOT_FOUND_ANIMAL,"404");
     }
+    public static Result DATE_MISMATCH(){
+        return new Result(false,Message.DATE_MISMATCH,"404");
+    }
+    public static Result UPDATE_NOT_FOUND_ID(){
+        return new Result(false,Message.UPDATE_NOT_FOUND_ID,"404");
+    }
+    public static Result BAD_DATE(){
+        return new Result(false,Message.BAD_DATE,"500");
+    }
 }
