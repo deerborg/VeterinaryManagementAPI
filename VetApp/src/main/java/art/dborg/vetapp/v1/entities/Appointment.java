@@ -19,5 +19,10 @@ public class Appointment {
     private long id;
 
     @Column(name = "appointment_date")
-    private LocalDateTime date;
+    private LocalDateTime dateTime;
+
+    @ManyToOne
+    @JoinColumn(name = "appointment_doctor_id",referencedColumnName = "doctor_id")
+    private Doctor doctor;
+
 }

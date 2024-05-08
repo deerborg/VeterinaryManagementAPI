@@ -10,7 +10,7 @@ import java.time.LocalDate;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class AnimalResponse {
+public class AnimalGetAllResponse {
     private String name;
     private String species;
     private String breed;

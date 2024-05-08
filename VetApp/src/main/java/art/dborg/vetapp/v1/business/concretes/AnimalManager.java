@@ -1,6 +1,7 @@
 package art.dborg.vetapp.v1.business.concretes;
 
 import art.dborg.vetapp.v1.business.abstracts.AnimalService;
+import art.dborg.vetapp.v1.core.exception.ForUpdateNotFoundIdException;
 import art.dborg.vetapp.v1.core.exception.NotFoundObjectRequest;
 import art.dborg.vetapp.v1.core.exception.NotFoundCustomerException;
 import art.dborg.vetapp.v1.core.exception.NotFoundException;
@@ -29,7 +30,7 @@ public class AnimalManager implements AnimalService {
 
     @Override
     public Animal update(Animal animal) {
-        getId(animal.getId());
+        animalRepository.findById(animal.getId()).orElseThrow(()-> new ForUpdateNotFoundIdException(Message.UPDATE_NOT_FOUND_ID));
         if (customerRepository.findById(animal.getCustomer().getId()).isEmpty()) {
             throw new NotFoundCustomerException(Message.NOT_FOUND_CUSTOMER);
         }

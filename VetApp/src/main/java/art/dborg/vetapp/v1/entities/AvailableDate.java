@@ -22,5 +22,10 @@ public class AvailableDate {
     private long id;
 
     @Column(name = "available_date")
-    private LocalDateTime dateTime;
+    @Temporal(TemporalType.DATE)
+    private LocalDate date;
+
+    @ManyToOne
+    @JoinColumn(name = "available_date_doctor_id",referencedColumnName = "doctor_id")
+    private Doctor doctors;
 }

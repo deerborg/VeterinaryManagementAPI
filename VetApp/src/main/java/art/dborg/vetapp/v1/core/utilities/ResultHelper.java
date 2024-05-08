@@ -40,4 +40,16 @@ public class ResultHelper {
     public static Result BAD_DATE(){
         return new Result(false,Message.BAD_DATE,"500");
     }
+    public static <T> ResultData<T> ERROR(T data){
+        return new ResultData<>(false,Message.NOT_NULL_MESSAGE,"400",data);
+    }
+    public static Result NOT_UNIQ(){
+        return new Result(false,Message.NOT_UNIQ,"500");
+    }
+    public static Result NOT_FOUND_DOCTOR(){
+        return new Result(false,Message.NOT_FOUND_DOCTOR,"404");
+    }
+    public static Result SAME_VALUES(){
+        return new Result(false,Message.SAME_VALUES,"404");
+    }
 }
