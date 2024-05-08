@@ -17,5 +17,5 @@ public class AvailableDateUpdateRequest {
     @NotNull
     private LocalDate date;
     @NotNull
-    private Doctor doctor;
+    private Doctor doctors;
 }

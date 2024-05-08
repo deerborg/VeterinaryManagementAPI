@@ -4,4 +4,8 @@ import art.dborg.vetapp.v1.entities.AvailableDate;
 
 public interface AvailableDateService {
     AvailableDate save(AvailableDate availableDate);
+    AvailableDate update(AvailableDate availableDate);
+    AvailableDate getId(long id);
+    boolean delete(long id);
+
 }

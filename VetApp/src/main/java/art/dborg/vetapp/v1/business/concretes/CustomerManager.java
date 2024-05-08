@@ -29,9 +29,6 @@ public class CustomerManager implements CustomerService {
     @Override
     public Customer update(Customer customer) {
         customerRepository.findById(customer.getId()).orElseThrow(()-> new ForUpdateNotFoundIdException(Message.UPDATE_NOT_FOUND_ID));
-        if(customerRepository.existsByMail(customer.getMail()) || customerRepository.existsByPhone(customer.getPhone())){
-            throw new NotUniqueValues(Message.NOT_UNIQ);
-        }
         return customerRepository.save(customer);
     }
 

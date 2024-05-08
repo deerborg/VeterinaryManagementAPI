@@ -3,7 +3,9 @@ package art.dborg.vetapp.v1.core.config;
 import art.dborg.vetapp.v1.core.Result.Result;
 import art.dborg.vetapp.v1.core.Result.ResultData;
 import art.dborg.vetapp.v1.core.exception.*;
+import art.dborg.vetapp.v1.core.utilities.Message;
 import art.dborg.vetapp.v1.core.utilities.ResultHelper;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -21,6 +23,11 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ResultData<List<String>>> handleValidationErrors(MethodArgumentNotValidException e) {
         List<String> errorList = e.getBindingResult().getFieldErrors().stream().map(FieldError::getDefaultMessage).toList();
         return new ResponseEntity<>(ResultHelper.ERROR(errorList), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<Result> handleDataIntegrityViolationException() {
+        return new ResponseEntity<>(ResultHelper.NOT_UNIQ(), HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(NotFoundException.class)
@@ -72,4 +79,6 @@ public class GlobalExceptionHandler {
     public ResponseEntity<Result> handeSameValuesException(){
         return new ResponseEntity<>(ResultHelper.SAME_VALUES(),HttpStatus.BAD_REQUEST);
     }
+
+
 }
