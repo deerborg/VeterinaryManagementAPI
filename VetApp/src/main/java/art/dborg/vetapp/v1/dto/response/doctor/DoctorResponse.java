@@ -6,6 +6,5 @@ import lombok.RequiredArgsConstructor;
 @Data
 @RequiredArgsConstructor
 public class DoctorResponse {
-    private long id;
-    private String name;
+    private String name; // Name of the doctor
 }

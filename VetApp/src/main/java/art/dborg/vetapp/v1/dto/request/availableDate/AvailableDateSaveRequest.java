@@ -12,8 +12,9 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AvailableDateSaveRequest {
-    @NotNull
-    private LocalDate date;
-    @NotNull
-    private Doctor doctors;
+    @NotNull(message = "Date cannot be null.")
+    private LocalDate date; // Date for the available date
+
+    @NotNull(message = "Doctor ID cannot be null.")
+    private Doctor doctors; // ID of the doctor for the available date
 }

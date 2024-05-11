@@ -6,8 +6,29 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+/**
+ * This interface provides methods for accessing animal data in the database.
+ */
 @Repository
-public interface AnimalRepository extends JpaRepository<Animal,Long> {
-    List<Animal> findByCustomer_Id(long animalCustomerId); // id göre müşteriye ait hayvanları listeler
-    List<Animal> findByName(String name); // isme göre hayvanları getirir, aynı isimde hayvan olma durumundan dolayı liste döndürdüm
+public interface AnimalRepository extends JpaRepository<Animal, Long> {
+    /**
+     * Finds animals by customer ID.
+     * @param animalCustomerId The ID of the customer.
+     * @return A list of animals belonging to the specified customer.
+     */
+    List<Animal> findByCustomer_Id(long animalCustomerId);
+
+    /**
+     * Finds animals by name.
+     * @param name The name of the animal.
+     * @return A list of animals with the specified name.
+     */
+    List<Animal> findByName(String name);
+
+    /**
+     * Finds animals by customer name.
+     * @param name The name of the customer.
+     * @return A list of animals belonging to customers with the specified name.
+     */
+    List<Animal> findByCustomerName(String name);
 }

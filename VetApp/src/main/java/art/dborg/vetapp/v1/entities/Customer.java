@@ -18,25 +18,25 @@ public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "customer_id",columnDefinition = "serial")
-    private long id;
+    private long id; // Unique identifier for the customer
 
     @Column(name = "customer_name")
-    private String name;
+    private String name; // Name of the customer
 
     @Column(name = "customer_phone",unique = true)
-    private String phone;
+    private String phone; // Phone number of the customer (unique)
 
     @Column(name = "customer_mail",unique = true)
     @Email
-    private String mail;
+    private String mail; // Email address of the customer (unique)
 
     @Column(name = "customer_address")
-    private String address;
+    private String address; // Address of the customer
 
     @Column(name = "customer_city")
-    private String city;
+    private String city; // City of the customer
 
-    @OneToMany(mappedBy = "customer",cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "customer",fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     @JsonIgnore
-    private List<Animal> animalList;
+    private List<Animal> animalList; // List of animals owned by the customer
 }

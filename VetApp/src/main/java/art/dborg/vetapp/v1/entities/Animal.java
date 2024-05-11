@@ -17,33 +17,37 @@ import java.util.List;
 public class Animal {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "animal_id",columnDefinition = "serial")
-    private long id;
+    @Column(name = "animal_id", columnDefinition = "serial")
+    private long id; // Unique identifier for the animal
 
     @Column(name = "animal_name")
-    private String name;
+    private String name; // Name of the animal
 
     @Column(name = "animal_species")
-    private String species;
+    private String species; // Species of the animal
 
     @Column(name = "animal_breed")
-    private String breed;
+    private String breed; // Breed of the animal
 
     @Column(name = "animal_gender")
-    private String gender;
+    private String gender; // Gender of the animal
 
     @Column(name = "animal_colour")
-    private String colour;
+    private String colour; // Colour of the animal
 
     @Column(name = "animal_date_of_birth")
     @Temporal(TemporalType.DATE)
-    private LocalDate dateOfBirth;
+    private LocalDate dateOfBirth; // Date of birth of the animal
 
-    @ManyToOne
-    @JoinColumn(name = "animal_customer_id",referencedColumnName = "customer_id")
-    private Customer customer;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "animal_customer_id", referencedColumnName = "customer_id")
+    private Customer customer; // Owner of the animal
 
-    @OneToMany(mappedBy = "animal",cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "animal", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     @JsonIgnore
-    private List<Vaccine> vaccines;
+    private List<Vaccine> vaccines; // Vaccines for the animal
+
+    @OneToMany(mappedBy = "animal", cascade = CascadeType.REMOVE)
+    @JsonIgnore
+    private List<Appointment> appointments; // Appointments for the animal
 }

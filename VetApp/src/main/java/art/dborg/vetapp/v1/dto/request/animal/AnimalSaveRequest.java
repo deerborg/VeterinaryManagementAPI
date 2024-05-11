@@ -12,18 +12,24 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AnimalSaveRequest {
-    @NotNull
-    private String name;
-    @NotNull
-    private String species;
-    @NotNull
-    private String breed;
-    @NotNull
-    private String gender;
-    @NotNull
-    private String colour;
-    @NotNull
-    private LocalDate dateOfBirth;
-    @NotNull
-    private Customer customer;
+    @NotNull(message = "Animal name cannot be null.")
+    private String name; // Name of the animal
+
+    @NotNull(message = "Animal species cannot be null.")
+    private String species; // Species of the animal
+
+    @NotNull(message = "Animal breed cannot be null.")
+    private String breed; // Breed of the animal
+
+    @NotNull(message = "Animal gender cannot be null.")
+    private String gender; // Gender of the animal
+
+    @NotNull(message = "Animal colour cannot be null.")
+    private String colour; // Colour of the animal
+
+    @NotNull(message = "Animal birth date cannot be null.")
+    private LocalDate dateOfBirth; // Date of birth of the animal
+
+    @NotNull(message = "Animal customer ID cannot be null.")
+    private Customer customer; // ID of the customer who owns the animal
 }

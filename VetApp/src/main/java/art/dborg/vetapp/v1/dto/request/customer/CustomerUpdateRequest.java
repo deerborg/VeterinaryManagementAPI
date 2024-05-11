@@ -10,17 +10,22 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CustomerUpdateRequest {
-    @NotNull
-    private long id;
-    @NotNull
-    private String name;
-    @NotNull
-    private String phone;
-    @NotNull
-    @Email
-    private String mail;
-    @NotNull
-    private String address;
-    @NotNull
-    private String city;
+    @NotNull(message = "ID cannot be null.")
+    private long id; // ID of the customer to be updated
+
+    @NotNull(message = "Customer name cannot be null.")
+    private String name; // Name of the customer
+
+    @NotNull(message = "Customer phone cannot be null.")
+    private String phone; // Phone number of the customer
+
+    @NotNull(message = "Customer mail cannot be null.")
+    @Email(message = "Email format is wrong. Format : mail@mail.com")
+    private String mail; // Email address of the customer
+
+    @NotNull(message = "Customer address cannot be null.")
+    private String address; // Address of the customer
+
+    @NotNull(message = "Customer city cannot be null.")
+    private String city; // City of the customer
 }

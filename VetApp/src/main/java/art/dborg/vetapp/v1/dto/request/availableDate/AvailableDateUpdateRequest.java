@@ -12,10 +12,12 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AvailableDateUpdateRequest {
-    @NotNull
-    private long id;
-    @NotNull
-    private LocalDate date;
-    @NotNull
-    private Doctor doctors;
+    @NotNull(message = "ID cannot be null.")
+    private long id; // ID of the available date to be updated
+
+    @NotNull(message = "Date cannot be null.")
+    private LocalDate date; // Date for the available date
+
+    @NotNull(message = "Doctor ID cannot be null.")
+    private Doctor doctors; // ID of the doctor for the available date
 }
