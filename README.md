@@ -62,6 +62,11 @@ The project consists of the following packages and classes:
 | GET /v1/vaccines/animal/{id}      | Retrieves vaccines by a specified animal. |
 | GET /v1/vaccines/end-date          | Filters vaccines by a specified end date. |
 
+
+## UML
+<img src ="Veterinary_Uml_Diagram.png"/>
+
+
 ## Installation and Usage
 
 Clone the project to your local machine. Then, open the project in a Java IDE (such as IntelliJ IDEA or Eclipse) and install Maven dependencies. Start the project and use a REST client to test the APIs.
