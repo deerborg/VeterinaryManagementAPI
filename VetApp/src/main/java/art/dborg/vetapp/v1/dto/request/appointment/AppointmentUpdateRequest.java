@@ -23,9 +23,6 @@ public class AppointmentUpdateRequest {
     @NotNull(message = "Doctor ID cannot be null.")
     private Doctor doctor; // ID of the doctor for the appointment
 
-    @NotNull(message = "AvailableDate ID cannot be null.")
-    private AvailableDate availableDate;
-
     @NotNull(message = "Date Time cannot be null.")
     private LocalDateTime dateTime; // Date and time of the appointment
 }

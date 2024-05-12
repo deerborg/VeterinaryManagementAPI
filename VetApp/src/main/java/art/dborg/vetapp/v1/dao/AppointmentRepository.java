@@ -72,8 +72,7 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Long> 
      *
      * @param doctorId    The ID of the doctor.
      * @param animalId    The ID of the animal.
-     * @param availableId The ID of the available date.
      * @return {@code true} if an entry exists with the provided criteria, {@code false} otherwise.
      */
-    boolean existsByDoctor_IdAndAnimal_IdAndAvailableDate_Id(long doctorId, long animalId, long availableId);
+    boolean existsByDoctor_IdAndAnimal_Id(long doctorId, long animalId);
 }

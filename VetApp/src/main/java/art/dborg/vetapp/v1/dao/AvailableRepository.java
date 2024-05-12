@@ -2,6 +2,8 @@ package art.dborg.vetapp.v1.dao;
 
 import art.dborg.vetapp.v1.entities.AvailableDate;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
@@ -45,4 +47,14 @@ public interface AvailableRepository extends JpaRepository<AvailableDate, Long> 
      * @return The available date for the specified date.
      */
     AvailableDate findByDate(LocalDate date);
+
+    /**
+     * Finds the available date ID based on the specified end date and doctor ID.
+     *
+     * @param endDate The end date to filter by.
+     * @param doctorId The ID of the doctor.
+     * @return The ID of the available date matching the specified end date and doctor ID.
+     */
+    @Query("select a.id from AvailableDate a where a.date = :endDate and a.doctors.id = :doctorId")
+    long findByAvailableIdInEndDateAndDoctorId(@Param("endDate") LocalDate endDate, @Param("doctorId") long doctorId);
 }
