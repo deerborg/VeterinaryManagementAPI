@@ -72,4 +72,8 @@ public class AvailableDateController {
         // Delete an available date by its ID.
         return ResultHelper.DELETE(availableDateService.delete(id));
     }
+    @DeleteMapping("/force-delete/{id}")
+    public Result forceDelete(@PathVariable("id") long id){
+        return ResultHelper.DELETE(availableDateService.forceDelete(id));
+    }
 }

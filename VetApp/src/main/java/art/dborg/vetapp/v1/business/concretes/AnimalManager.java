@@ -84,7 +84,7 @@ public class AnimalManager implements AnimalService {
      * @throws NotFoundObjectRequest If no animals are found with the specified name.
      */
     @Override
-    public List<Animal> getAnimalByName(String name) {
+    public List<Animal> getAnimalByName(String name) { // Section 13 - filter by name
         if(animalRepository.findByName(name).isEmpty()){
             throw new NotFoundObjectRequest(Message.NOT_FOUND);
         }

@@ -26,11 +26,11 @@ public class AvailableDate {
     @Temporal(TemporalType.DATE)
     private LocalDate date; // Date of availability
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER) // Section - 9 : Relationships between entities
     @JoinColumn(name = "available_date_doctor_id",referencedColumnName = "doctor_id")
     private Doctor doctors; // Doctor associated with the available date
 
-    @OneToMany(mappedBy = "availableDate",cascade = {CascadeType.REMOVE,CascadeType.MERGE},fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "availableDate",cascade = {CascadeType.REMOVE,CascadeType.MERGE},fetch = FetchType.LAZY) // Section - 9 : Relationships between entities
     @JsonIgnore
     private List<Appointment> appointments; // Appointments scheduled for the available date
 }

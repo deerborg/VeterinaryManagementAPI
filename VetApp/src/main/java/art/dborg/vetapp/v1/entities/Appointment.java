@@ -21,15 +21,15 @@ public class Appointment {
     @Column(name = "appointment_date")
     private LocalDateTime dateTime; // Date and time of the appointment
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER) // Section - 9 : Relationships between entities
     @JoinColumn(name = "appointment_doctor_id",referencedColumnName = "doctor_id")
     private Doctor doctor; // Doctor associated with the appointment
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER) // Section - 9 : Relationships between entities
     @JoinColumn(name = "appointment_animal_id",referencedColumnName = "animal_id")
     private Animal animal; // Animal associated with the appointment
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER) // Section - 9 : Relationships between entities
     @JoinColumn(name = "appointment_available_date_id",referencedColumnName = "available_date_id")
     private AvailableDate availableDate; // Available date associated with the appointment
 }

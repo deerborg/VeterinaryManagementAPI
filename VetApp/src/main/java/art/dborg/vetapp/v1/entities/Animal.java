@@ -39,15 +39,15 @@ public class Animal {
     @Temporal(TemporalType.DATE)
     private LocalDate dateOfBirth; // Date of birth of the animal
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER) // Section - 9 : Relationships between entities
     @JoinColumn(name = "animal_customer_id", referencedColumnName = "customer_id")
     private Customer customer; // Owner of the animal
 
-    @OneToMany(mappedBy = "animal", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "animal", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE) // Section - 9 : Relationships between entities
     @JsonIgnore
     private List<Vaccine> vaccines; // Vaccines for the animal
 
-    @OneToMany(mappedBy = "animal", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "animal", cascade = CascadeType.REMOVE) // Section - 9 : Relationships between entities
     @JsonIgnore
     private List<Appointment> appointments; // Appointments for the animal
 }

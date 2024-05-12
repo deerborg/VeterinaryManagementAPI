@@ -25,7 +25,7 @@ public class Message {
     public static final String DAYS_CONFLICT = "The doctor is not working on this date."; // Message for doctor's availability conflict
     public static final String APPOINTMENT_CONFLICT = "Another appointment is available at the entered time."; // Message for appointment time conflict
     public static final String NOT_FOUND_APPOINTMENT = "There are no dates in the date ranges."; // Message for appointment not found
-    public static final String EXISTING_APPOINTMENT = "Update and Delete cannot be done! An appointment has been made for this date. Contact with the customer."; // Message for existing appointment
+    public static final String EXISTING_APPOINTMENT = "Update and Delete cannot be done! An appointment has been made for this date. Contact with the customer.If you have provided the checks, go to ..../force-delete. "; // Message for existing appointment
     public static final String UNREADABLE = "There is a syntax error in the JSON request"; // Message for unreadable JSON request
     public static final String FORCE_UPDATE = "The animal to be changed has a checked vaccine with the same vaccine code. If you really want to make changes, do it via .../force-update. Attention: Control cannot be achieved between other vaccines!"; // Message for force update operation
     public static final String MISSING_PARAMETER = "Missing parameter entry.";

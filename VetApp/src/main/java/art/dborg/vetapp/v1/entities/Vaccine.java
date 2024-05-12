@@ -35,7 +35,7 @@ public class Vaccine {
     @Temporal(TemporalType.DATE)
     private LocalDate endDate; // End date of protection provided by the vaccine
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER) // Section - 9 : Relationships between entities
     @JoinColumn(name = "vaccine_animal_id",referencedColumnName = "animal_id")
     private Animal animal; // Animal associated with the vaccine
 }

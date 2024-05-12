@@ -31,20 +31,18 @@ public class VaccineManager implements VaccineService {
      * @throws NoneSenseInformationException If the end date is before the start date or other senseless information is provided.
      */
     @Override
-    public Vaccine addVaccine(Vaccine vaccine) {
+    public Vaccine addVaccine(Vaccine vaccine) { // Section 21 - Vaccine registration
         if (animalRepository.findById(vaccine.getAnimal().getId()).isEmpty()) {
             throw new NotFoundAnimalException(Message.NOT_FOUND_ANIMAL);
         }
         if (vaccineRepository.existsVaccineByCodeAndNameAndAnimal_id(vaccine.getCode(), vaccine.getName(), vaccine.getAnimal().getId())) {
-            for (int i = 0; i < vaccineRepository.findAll().size(); i++) {
-                if (ChronoUnit.DAYS.between(vaccine.getStartDate(), vaccineRepository.findAll().get(i).getEndDate()) >= 0) {
-                    throw new DateMistmatchException(Message.DATE_MISMATCH);
-                }
+            if(vaccineRepository.findByEndDateAfterOrderByEndDate(vaccine.getStartDate()).isEmpty()){ // Section 22 - Vaccine day check
                 if (ChronoUnit.DAYS.between(vaccine.getStartDate(), vaccine.getEndDate()) < 0) {
                     throw new NoneSenseInformationException(Message.BAD_DATE);
                 }
+                return vaccineRepository.save(vaccine);
             }
-            return vaccineRepository.save(vaccine);
+            throw new DateMistmatchException(Message.DATE_MISMATCH);
         }
         if (ChronoUnit.DAYS.between(vaccine.getStartDate(), vaccine.getEndDate()) < 0) {
             throw new NoneSenseInformationException(Message.BAD_DATE);
@@ -74,7 +72,13 @@ public class VaccineManager implements VaccineService {
     @Override
     public Vaccine update(Vaccine vaccine) {
         getId(vaccine.getId());
-        if(vaccineRepository.countVaccineByNameAndCodeAndAnimal_Id(vaccine.getName(),vaccine.getCode(),vaccine.getAnimal().getId()) >= 2){
+        if (vaccineRepository.existsVaccineByCodeAndNameAndAnimal_id(vaccine.getCode(), vaccine.getName(), vaccine.getAnimal().getId())) {
+            if(vaccineRepository.findByEndDateAfterOrderByEndDate(vaccine.getStartDate()).isEmpty()){
+                if (ChronoUnit.DAYS.between(vaccine.getStartDate(), vaccine.getEndDate()) < 0) {
+                    throw new NoneSenseInformationException(Message.BAD_DATE);
+                }
+                return vaccineRepository.save(vaccine);
+            }
             throw new ForceUpdateException(Message.FORCE_UPDATE);
         }
         return addVaccine(vaccine);
@@ -114,7 +118,7 @@ public class VaccineManager implements VaccineService {
      * @throws NotFoundAnimalException If the animal with the specified ID is not found.
      */
     @Override
-    public List<Vaccine> getAnimalVaccineList(long id) {
+    public List<Vaccine> getAnimalVaccineList(long id) { // Section 24 - filter by animal vaccines
         if (vaccineRepository.findByAnimal_Id(id).isEmpty()) {
             throw new NotFoundAnimalException(Message.NOT_FOUND_ANIMAL);
         }
@@ -128,7 +132,7 @@ public class VaccineManager implements VaccineService {
      * @throws NotFoundObjectRequest If no vaccine entities are found with the specified end date.
      */
     @Override
-    public List<Vaccine> getFilterByStartAndEndDate(LocalDate firstDate,LocalDate endDate) {
+    public List<Vaccine> getFilterByStartAndEndDate(LocalDate firstDate,LocalDate endDate) { // Section 23 - filter by end date
         if (vaccineRepository.findByEndDateBetween(firstDate,endDate).isEmpty()) {
             throw new NotFoundObjectRequest(Message.NOT_FOUND);
         }

@@ -36,7 +36,7 @@ public class Customer {
     @Column(name = "customer_city")
     private String city; // City of the customer
 
-    @OneToMany(mappedBy = "customer",fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "customer",fetch = FetchType.LAZY, cascade = CascadeType.REMOVE) // Section - 9 : Relationships between entities
     @JsonIgnore
     private List<Animal> animalList; // List of animals owned by the customer
 }

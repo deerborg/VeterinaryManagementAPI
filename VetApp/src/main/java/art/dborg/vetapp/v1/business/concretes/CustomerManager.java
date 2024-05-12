@@ -18,7 +18,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CustomerManager implements CustomerService {
     private final CustomerRepository customerRepository;
-
     /**
      * Saves a new customer.
      * @param customer The customer entity to be saved.
@@ -26,7 +25,7 @@ public class CustomerManager implements CustomerService {
      * @throws NotUniqueValues If the provided email or phone number already exist in the database.
      */
     @Override
-    public Customer save(Customer customer) {
+    public Customer save(Customer customer) { // Section 10 - Pet owner registration
         if(customerRepository.existsByMail(customer.getMail()) || customerRepository.existsByPhone(customer.getPhone())){
             throw new NotUniqueValues(Message.NOT_UNIQUE);
         }
@@ -74,7 +73,7 @@ public class CustomerManager implements CustomerService {
      * @throws NotFoundObjectRequest If no customers are found with the specified name.
      */
     @Override
-    public List<Customer> getByCustomerName(String name) {
+    public List<Customer> getByCustomerName(String name) { // Section 11 - filter by name
         if(customerRepository.findByName(name).isEmpty()){
             throw new NotFoundObjectRequest(Message.NOT_FOUND);
         }
@@ -89,7 +88,7 @@ public class CustomerManager implements CustomerService {
      * @throws NotFoundObjectRequest If no animals are found for the customer.
      */
     @Override
-    public List<Animal> getByAnimalList(long id) {
+    public List<Animal> getByAnimalList(long id) { // Section - 14 Listing owned animals
         if(customerRepository.findById(id).isEmpty()){
             throw new NotFoundCustomerException(Message.NOT_FOUND_CUSTOMER);
         }

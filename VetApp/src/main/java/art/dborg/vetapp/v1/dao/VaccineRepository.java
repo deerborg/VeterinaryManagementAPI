@@ -69,4 +69,13 @@ public interface VaccineRepository extends JpaRepository<Vaccine, Long> {
      * @return The count of vaccines with the specified name, code, and animal ID.
      */
     long countVaccineByNameAndCodeAndAnimal_Id(String name, String code, long animalId);
+
+    /**
+     * Finds vaccines with end dates after the specified end date, ordered by end date.
+     *
+     * @param endDate The end date to filter by.
+     * @return A list of vaccines with end dates after the specified end date, ordered by end date.
+     */
+    List<Vaccine> findByEndDateAfterOrderByEndDate(LocalDate endDate);
+
 }

@@ -33,4 +33,6 @@ public interface AvailableDateService {
      * @return A boolean indicating whether the deletion was successful.
      */
     boolean delete(long id);
+
+    boolean forceDelete(long id);
 }

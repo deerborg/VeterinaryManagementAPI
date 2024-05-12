@@ -34,11 +34,11 @@ public class Doctor {
     @Column(name = "doctor_city")
     private String city; // City of the doctor
 
-    @OneToMany(mappedBy = "doctor", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "doctor", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE) // Section - 9 : Relationships between entities
     @JsonIgnore
     private List<Appointment> appointments; // Appointments associated with the doctor
 
-    @OneToMany(mappedBy = "doctors", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "doctors", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE) // Section - 9 : Relationships between entities
     @JsonIgnore
     private List<AvailableDate> availableDates; // Available dates for the doctor
 }

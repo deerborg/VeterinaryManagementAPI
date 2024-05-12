@@ -38,12 +38,11 @@ public class AppointmentManager implements AppointmentService {
      * @throws AppointmentConflictException If there is a conflict with an existing appointment at the same time.
      */
     @Override
-    public Appointment addAppointments(Appointment appointment) {
-        if (animalRepository.findById(appointment.getAnimal().getId()).isEmpty() || doctorRepository.findById(appointment.getDoctor().getId()).isEmpty()) {
+    public Appointment addAppointments(Appointment appointment) { // Section 18 - Save an appointment
+        if (!appointmentRepository.existsByDoctor_IdAndAnimal_IdAndAvailableDate_Id(appointment.getDoctor().getId(),appointment.getAnimal().getId(),appointment.getAvailableDate().getId())) {
             throw new NotFoundException(Message.NOT_FOUND_ID);
         }
-        if (availableRepository.existsByDateAndDoctors_Id(appointment.getDateTime().toLocalDate(), appointment.getDoctor().getId())) {
-            appointment.setAvailableDate(availableRepository.findByDate(appointment.getDateTime().toLocalDate()));
+        if (availableRepository.existsByIdAndDateAndDoctors_Id(appointment.getAvailableDate().getId(),appointment.getDateTime().toLocalDate(), appointment.getDoctor().getId())) {
             for (int i = 0; i < appointmentRepository.findAll().size(); i++) {
                 if(appointmentRepository.existsByDoctor_Id(appointment.getDoctor().getId())){
                     if(Duration.between(appointment.getDateTime(),appointmentRepository.findAll().get(i).getDateTime()).toHours() == 0){
@@ -102,7 +101,7 @@ public class AppointmentManager implements AppointmentService {
      * @throws NotFoundAppointment If no appointments are found within the specified date range.
      */
     @Override
-    public List<Appointment> filterDateTimeAndDoctor(LocalDateTime startDate, LocalDateTime endDate, Doctor doctor) {
+    public List<Appointment> filterDateTimeAndDoctor(LocalDateTime startDate, LocalDateTime endDate, Doctor doctor) { // Section 20 - filter by doctor id and date
         if(doctorRepository.findById(doctor.getId()).isEmpty()){
             throw new NotFoundDoctorException(Message.NOT_FOUND_DOCTOR);
         }
@@ -122,7 +121,7 @@ public class AppointmentManager implements AppointmentService {
      * @throws NotFoundAppointment If no appointments are found within the specified date range.
      */
     @Override
-    public List<Appointment> filterDateTimeAndAnimal(LocalDateTime startDate, LocalDateTime endDate, Animal animal) {
+    public List<Appointment> filterDateTimeAndAnimal(LocalDateTime startDate, LocalDateTime endDate, Animal animal) { // Section 20 - filter by animal id and date
         if(animalRepository.findById(animal.getId()).isEmpty()){
             throw new NotFoundAnimalException(Message.NOT_FOUND_ANIMAL);
         }

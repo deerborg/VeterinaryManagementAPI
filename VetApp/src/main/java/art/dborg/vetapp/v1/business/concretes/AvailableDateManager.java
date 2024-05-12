@@ -31,7 +31,7 @@ public class AvailableDateManager implements AvailableDateService {
      * @throws SameValuesException If the same available date already exists for the specified doctor.
      */
     @Override
-    public AvailableDate save(AvailableDate availableDate) {
+    public AvailableDate save(AvailableDate availableDate) { // Section 16 - Save doctor available day
         if(doctorRepository.findById(availableDate.getDoctors().getId()).isEmpty()){
             throw new NotFoundDoctorException(Message.NOT_FOUND_DOCTOR);
         }
@@ -90,4 +90,11 @@ public class AvailableDateManager implements AvailableDateService {
         availableRepository.delete(getId(id));
         return true;
     }
+
+    @Override
+    public boolean forceDelete(long id) {
+        availableRepository.delete(getId(id));
+        return true;
+    }
+
 }

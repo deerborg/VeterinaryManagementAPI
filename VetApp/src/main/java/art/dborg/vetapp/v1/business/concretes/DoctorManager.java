@@ -26,7 +26,7 @@ public class DoctorManager implements DoctorService {
      * @throws NotUniqueValues If the provided email or phone number already exist in the database.
      */
     @Override
-    public Doctor save(Doctor doctor) {
+    public Doctor save(Doctor doctor) { // Section 15 - Registering a doctor
         if(doctorRepository.existsByMailOrPhone(doctor.getMail(),doctor.getPhone())){
             throw new NotUniqueValues(Message.NOT_UNIQUE);
         }
