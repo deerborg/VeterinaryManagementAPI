@@ -42,19 +42,22 @@ public class AppointmentManager implements AppointmentService {
     @Override
     public Appointment addAppointments(Appointment appointment) { // Section 18 - Save an appointment
         // Check if the specified doctor and animal exist
-        if (!appointmentRepository.existsByDoctor_IdAndAnimal_Id(appointment.getDoctor().getId(), appointment.getAnimal().getId())) {
+        if (!doctorRepository.existsById(appointment.getDoctor().getId()) || !animalRepository.existsById(appointment.getAnimal().getId())) {
             throw new NotFoundException(Message.NOT_FOUND_ID);
         }
+
+        if(availableRepository.findByAvailableIdInEndDateAndDoctorId(appointment.getDateTime().toLocalDate(), appointment.getDoctor().getId()) == null){
+            throw new DoctorDaysConflictException(Message.DAYS_CONFLICT);
+        }
         // Find the available date ID for the appointment's date and doctor
-        long availableId = availableRepository.findByAvailableIdInEndDateAndDoctorId(appointment.getDateTime().toLocalDate(), appointment.getDoctor().getId());
+        Long availableId = availableRepository.findByAvailableIdInEndDateAndDoctorId(appointment.getDateTime().toLocalDate(), appointment.getDoctor().getId());
 
         // Check if the available date exists for the specified date and doctor
         if (availableRepository.existsByIdAndDateAndDoctors_Id(availableId, appointment.getDateTime().toLocalDate(), appointment.getDoctor().getId())) {
-
             // Check for appointment conflicts
             for (int i = 0; i < appointmentRepository.findAll().size(); i++) {
                 if (appointmentRepository.existsByDoctor_Id(appointment.getDoctor().getId())) {
-                    if (Duration.between(appointment.getDateTime(), appointmentRepository.findAll().get(i).getDateTime()).toHours() == 0) {
+                    if (Duration.between(appointment.getDateTime(), appointmentRepository.findAll().get(i).getDateTime()).toHours() == 0) { // Section 18 - Save an appointment
                         throw new AppointmentConflictException(Message.APPOINTMENT_CONFLICT);
                     }
                 }

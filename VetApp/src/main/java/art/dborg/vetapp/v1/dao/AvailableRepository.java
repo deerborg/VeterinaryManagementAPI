@@ -56,5 +56,7 @@ public interface AvailableRepository extends JpaRepository<AvailableDate, Long> 
      * @return The ID of the available date matching the specified end date and doctor ID.
      */
     @Query("select a.id from AvailableDate a where a.date = :endDate and a.doctors.id = :doctorId")
-    long findByAvailableIdInEndDateAndDoctorId(@Param("endDate") LocalDate endDate, @Param("doctorId") long doctorId);
+    Long findByAvailableIdInEndDateAndDoctorId(@Param("endDate") LocalDate endDate, @Param("doctorId") long doctorId);
+
+    boolean existsAvailableDateByDate(LocalDate date);
 }
