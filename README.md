@@ -8,12 +8,10 @@ This project has been developed using the following technologies:
 
 - **Java**
 - **Spring Boot**
-- **Spring MVC**
 - **Spring Data JPA**
 - **ModelMapper**
 - **Lombok**
 - **Hibernate**
-- **H2 Database**
 - **Maven**
 
 ## Project Structure
