@@ -1,8 +1,7 @@
-package art.dborg.vetapp.v1.core.config;
+package art.dborg.vetapp.v1.core.exception;
 
 import art.dborg.vetapp.v1.core.result.Result;
 import art.dborg.vetapp.v1.core.result.ResultData;
-import art.dborg.vetapp.v1.core.exception.*;
 import art.dborg.vetapp.v1.core.utilities.ResultHelper;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;

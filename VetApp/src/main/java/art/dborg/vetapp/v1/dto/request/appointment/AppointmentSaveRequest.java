@@ -15,11 +15,13 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class AppointmentSaveRequest {
     @NotNull(message = "Animal ID cannot be null.")
-    private Animal animal; // ID of the animal for the appointment
+    private Animal animal;
 
     @NotNull(message = "Doctor ID cannot be null.")
-    private Doctor doctor; // ID of the doctor for the appointment
+    private Doctor doctor;
 
     @NotNull(message = "Date Time cannot be null.")
-    private LocalDateTime dateTime; // Date and time of the appointment
+    private LocalDateTime dateTime;
+
+    private AvailableDate availableDate;
 }
