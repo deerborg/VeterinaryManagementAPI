@@ -9,6 +9,7 @@ This project has been developed using the following technologies:
 - **Java**
 - **Spring Boot**
 - **Spring Data JPA**
+- **Spring Security**
 - **ModelMapper**
 - **Lombok**
 - **Hibernate**
