@@ -17,28 +17,28 @@ public class Doctor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "doctor_id", columnDefinition = "serial")
-    private long id; // Unique identifier for the doctor
+    private long id;
 
     @Column(name = "doctor_name")
-    private String name; // Name of the doctor
+    private String name;
 
     @Column(name = "doctor_phone", unique = true)
-    private String phone; // Phone number of the doctor (unique)
+    private String phone;
 
     @Column(name = "doctor_mail", unique = true)
-    private String mail; // Email address of the doctor (unique)
+    private String mail;
 
     @Column(name = "doctor_address")
-    private String address; // Address of the doctor
+    private String address;
 
     @Column(name = "doctor_city")
-    private String city; // City of the doctor
+    private String city;
 
-    @OneToMany(mappedBy = "doctor", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE) // Section - 9 : Relationships between entities
+    @OneToMany(mappedBy = "doctor", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     @JsonIgnore
-    private List<Appointment> appointments; // Appointments associated with the doctor
+    private List<Appointment> appointments;
 
-    @OneToMany(mappedBy = "doctors", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE) // Section - 9 : Relationships between entities
+    @OneToMany(mappedBy = "doctors", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     @JsonIgnore
-    private List<AvailableDate> availableDates; // Available dates for the doctor
+    private List<AvailableDate> availableDates;
 }

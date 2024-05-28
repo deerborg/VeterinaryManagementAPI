@@ -18,36 +18,36 @@ public class Animal {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "animal_id", columnDefinition = "serial")
-    private long id; // Unique identifier for the animal
+    private long id;
 
     @Column(name = "animal_name")
-    private String name; // Name of the animal
+    private String name;
 
     @Column(name = "animal_species")
-    private String species; // Species of the animal
+    private String species;
 
     @Column(name = "animal_breed")
-    private String breed; // Breed of the animal
+    private String breed;
 
     @Column(name = "animal_gender")
-    private String gender; // Gender of the animal
+    private String gender;
 
     @Column(name = "animal_colour")
-    private String colour; // Colour of the animal
+    private String colour;
 
     @Column(name = "animal_date_of_birth")
     @Temporal(TemporalType.DATE)
-    private LocalDate dateOfBirth; // Date of birth of the animal
+    private LocalDate dateOfBirth;
 
-    @ManyToOne(fetch = FetchType.EAGER) // Section - 9 : Relationships between entities
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "animal_customer_id", referencedColumnName = "customer_id")
     private Customer customer; // Owner of the animal
 
-    @OneToMany(mappedBy = "animal", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE) // Section - 9 : Relationships between entities
+    @OneToMany(mappedBy = "animal", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     @JsonIgnore
-    private List<Vaccine> vaccines; // Vaccines for the animal
+    private List<Vaccine> vaccines;
 
-    @OneToMany(mappedBy = "animal", cascade = CascadeType.REMOVE) // Section - 9 : Relationships between entities
+    @OneToMany(mappedBy = "animal", cascade = CascadeType.REMOVE)
     @JsonIgnore
-    private List<Appointment> appointments; // Appointments for the animal
+    private List<Appointment> appointments;
 }

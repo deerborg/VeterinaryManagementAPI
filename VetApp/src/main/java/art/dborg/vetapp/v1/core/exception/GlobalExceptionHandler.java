@@ -19,7 +19,7 @@ import java.util.List;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
-    // Section 25 - Custom Exception
+
 
     /**
      * Exception handler for MethodArgumentNotValidException.
