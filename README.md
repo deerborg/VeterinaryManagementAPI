@@ -6,7 +6,7 @@ VetApp is a web application that assists veterinarians and veterinary clinics in
 
 This project has been developed using the following technologies:
 
-- **Java**
+- **Java (JDK 22)**
 - **Spring Boot**
 - **Spring Data JPA**
 - **Spring Security**
