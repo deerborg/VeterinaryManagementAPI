@@ -1,5 +1,6 @@
 package art.dborg.vetapp.v1.controller;
 
+import art.dborg.vetapp.v1.dto.response.customer.CustomerOnlyIdResponse;
 import art.dborg.vetapp.v1.service.abstracts.CustomerService;
 import art.dborg.vetapp.v1.core.result.Result;
 import art.dborg.vetapp.v1.core.result.ResultData;
@@ -58,5 +59,17 @@ public class CustomerController {
     @GetMapping("/by-animal-list/{id}")
     public ResultData<List<AnimalResponse>> getByAnimalList(@PathVariable("id") long id){
         return customerService.getByAnimalList(id);
+    }
+    @GetMapping("/all-id")
+    public ResultData<List<CustomerOnlyIdResponse>> getAllId(){
+        return customerService.getOnlyId();
+    }
+    @GetMapping("/all-customer")
+    public ResultData<List<CustomerResponse>> getAllCustomer(){
+        return customerService.getAllCustomers();
+    }
+    @DeleteMapping("/name/{name}")
+    public Result deleteByName(@PathVariable String name){
+        return ResultHelper.DELETE(customerService.deleteByName(name));
     }
 }

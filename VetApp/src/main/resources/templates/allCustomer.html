@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Müşteri Listesi</title>
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: #f4f4f4;
+            background-image: url('https://wallsneedlove.com/cdn/shop/products/w0596_1s_Blue-and-coral-bohemian-eclectic-tiger-wallpaper-Feline-Fatale_Repeating-Pattern-Sample-1b.jpg?v=1635528454');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .card {
+            width: 300px;
+            background-color: rgba(255, 255, 255, 0.99);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            animation: slideOpacity 3s infinite alternate;
+        }
+
+        @keyframes slideOpacity {
+            0% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            100% {
+                opacity: 0.90;
+                transform: translateY(10px);
+            }
+        }
+
+        h1 {
+            color: #007BFF;
+            margin-bottom: 20px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.99);
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .button-container {
+            display: flex;
+        }
+
+        button {
+            margin-left: 5px;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button.delete {
+            background-color: #dc3545;
+            color: #fff;
+        }
+
+        button.update {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        #error-message {
+            display: none;
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="card">
+        <h1>Müşteri Listesi</h1>
+        <div id="error-message"></div>
+        <div id="customerList">
+            <ul>
+                <!-- JavaScript ile oluşturulacak müşteri listesi buraya gelecek -->
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script>
+    // JavaScript kodu
+    fetch('/v1/customers/all-customer')
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === true) {
+                const customers = data.data;
+                const htmlContent = customers.map(customer => {
+                    return `<li>
+                                <span>${customer.name}</span>
+                                <div class="button-container">
+                                    <button class="delete" data-id="${customer.id}" data-name="${customer.name}">Delete</button>
+                                    <button class="update" data-id="${customer.id}">Update</button>
+                                </div>
+                            </li>`;
+                }).join("");
+                document.getElementById("customerList").innerHTML = "<ul>" + htmlContent + "</ul>";
+
+                const deleteButtons = document.querySelectorAll(".delete");
+                deleteButtons.forEach(button => {
+                    button.addEventListener("click", function() {
+                        const customerId = this.getAttribute("data-id");
+                        const customerName = this.getAttribute("data-name");
+                        // Silme isteği gönderme
+                        fetch(`/v1/customers/name/${customerName}`, {
+                            method: 'DELETE'
+                        })
+                            .then(response => response.json())
+                            .then(data => {
+                                document.getElementById('error-message').innerText = data.message;
+                                document.getElementById('error-message').style.backgroundColor = '#28a745'; // Yeşil arka plan başarılı işlem için
+                                document.getElementById('error-message').style.display = 'block';
+
+                                // 2 saniye bekleyip sayfayı yenileme
+                                setTimeout(() => {
+                                    window.location.reload();
+                                }, 2000);
+
+                                if (data.status === true) {
+                                    console.log("Müşteri ID'si: ", customerId, " başarıyla silindi.");
+                                    // Silinen müşteriyi listeden kaldırma
+                                    this.parentNode.parentNode.remove(); // Butonun bulunduğu <li> öğesini kaldırır
+                                } else {
+                                    console.error("Silme işlemi başarısız oldu: " + data.message);
+                                }
+                            })
+                            .catch(error => console.error("Hata oluştu:", error));
+                    });
+                });
+
+                const updateButtons = document.querySelectorAll(".update");
+                updateButtons.forEach(button => {
+                    button.addEventListener("click", function() {
+                        const customerId = this.getAttribute("data-id");
+                        // Güncelleme işlemi burada yapılacak
+                        console.log("Müşteri ID'si: ", customerId, " güncellendi.");
+                        // Update butonuna basıldığında updateCustomer sayfasına yönlendirme
+                        window.location.href = `/updateCustomer`;
+                    });
+                });
+            } else {
+                console.error("İstek başarısız oldu: " + data.message);
+            }
+        })
+        .catch(error => console.error("Hata oluştu:", error));
+</script>
+</body>
+</html>

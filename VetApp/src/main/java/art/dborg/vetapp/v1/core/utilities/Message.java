@@ -1,9 +1,6 @@
 package art.dborg.vetapp.v1.core.utilities;
 
 public class Message {
-
-    // This class contains constant strings representing error messages for various exceptions in the application.
-
     public static final String NOT_FOUND_ID = "Not found ID"; // General message for objects not found
     public static final String NOT_FOUND_CUSTOMER = "Not found Customer ID"; // Error message for Customer not found
     public static final String RESOLVE = "Please remember to correct the dates between past vaccinations."; // Message to resolve vaccination date issues
@@ -29,5 +26,6 @@ public class Message {
     public static final String UNREADABLE = "There is a syntax error in the JSON request"; // Message for unreadable JSON request
     public static final String FORCE_UPDATE = "The animal to be changed has a checked vaccine with the same vaccine code. If you really want to make changes, do it via .../force-update. Attention: Control cannot be achieved between other vaccines!"; // Message for force update operation
     public static final String MISSING_PARAMETER = "Missing parameter entry.";
+    public static final String UNAUTHORIZED = "Wrong Password or Username";
 }
 

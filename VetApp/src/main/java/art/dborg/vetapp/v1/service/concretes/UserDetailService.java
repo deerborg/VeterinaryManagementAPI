@@ -1,5 +1,7 @@
 package art.dborg.vetapp.v1.service.concretes;
 
+import art.dborg.vetapp.v1.core.exception.NotFoundUserPasswordOrUsername;
+import art.dborg.vetapp.v1.core.utilities.Message;
 import art.dborg.vetapp.v1.service.abstracts.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;

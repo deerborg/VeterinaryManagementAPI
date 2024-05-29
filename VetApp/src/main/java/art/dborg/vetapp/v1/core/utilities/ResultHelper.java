@@ -243,6 +243,10 @@ public class ResultHelper {
     public static Result MISSING_PARAMETER() {
         return new Result(false, Message.MISSING_PARAMETER, "502");
     }
+
+    public static Result UNAUTHORIZED(){
+        return new Result(false,Message.UNAUTHORIZED,"401");
+    }
 }
 
 

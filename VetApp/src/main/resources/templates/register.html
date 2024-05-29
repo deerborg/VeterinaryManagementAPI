@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: #f4f4f4;
+            background-image: url('https://wallsneedlove.com/cdn/shop/products/w0559_1s_Lush-Jungle-Night-Leopard-Wallpaper-Midnight-Prowl_Repeating-Pattern-Sample-1_2c294bb2-90b0-49bd-8838-024398cd62c6.jpg?v=1604087705'); /* Arka plan resminin URL'sini buraya ekleyin */
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .card {
+            width: 300px;
+            background-color: rgba(255, 255, 255, 0.99); /* Opaklık ayarı */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            animation: slideOpacity 3s infinite alternate; /* Animasyonu tanımla */
+        }
+
+        @keyframes slideOpacity {
+            0% {
+                opacity: 1; /* Başlangıç opaklığı */
+                transform: translateY(0); /* Başlangıç pozisyonu */
+            }
+            100% {
+                opacity: 0.90; /* Bitiş opaklığı */
+                transform: translateY(10px); /* Bitiş pozisyonu */
+            }
+        }
+
+        h2 {
+            color: #007BFF;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            text-align: left;
+            margin-bottom: 5px;
+        }
+
+        input {
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .switch {
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+        .switch a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="card">
+        <h2>Register Form</h2>
+        <form id="registerForm">
+            <label for="fullname">Username</label>
+            <input type="text" id="fullname" placeholder="Enter your full name">
+
+            <label for="new-password">New Password</label>
+            <input type="password" id="new-password" placeholder="Enter your new password">
+
+            <button type="submit">Register</button>
+        </form>
+        <div class="switch">Already have an account? <a href="/login">Login here</a></div>
+    </div>
+</div>
+<script>
+    document.getElementById('registerForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const fullname = document.getElementById('fullname').value;
+        const newPassword = document.getElementById('new-password').value;
+
+        fetch('/v1/users', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                username: fullname,
+                password: newPassword,
+            }),
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                window.location.href = '/login'; // Kayıt olduktan sonra giriş sayfasına yönlendir
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+    });
+</script>
+</body>
+</html>

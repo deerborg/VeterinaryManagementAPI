@@ -1,6 +1,8 @@
 package art.dborg.vetapp.v1.dto.request.customer;
 
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,6 +13,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CustomerSaveRequest {
     @NotNull(message = "Customer name cannot be null.")
+    @NotEmpty(message = "Customer name cannot be Empty")
+    @NotBlank(message = "Customer name cannot be blank")
     private String name; // Name of the customer
 
     @NotNull(message = "Customer phone cannot be null.")

@@ -18,7 +18,7 @@ public class UserSaveRequest {
     private String username;
     @NotNull
     private String password;
-    @NotNull(message = "Roles not null")
+
     private List<Role> roles;
 
     private boolean accountNonExpired = true;

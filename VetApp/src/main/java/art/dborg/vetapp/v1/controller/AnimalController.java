@@ -30,20 +30,17 @@ public class AnimalController {
         return animalService.getAnimalById(id);
     }
 
-
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ResultData<AnimalResponse> addAnimal(@Valid @RequestBody() AnimalSaveRequest animalSaveRequest) {
         return animalService.addAnimal(animalSaveRequest);
     }
 
-
     @PutMapping
     @ResponseStatus(HttpStatus.OK)
     public ResultData<AnimalResponse> updateAnimal(@Valid @RequestBody AnimalUpdateRequest animalUpdateRequest) {
        return animalService.updateAnimal(animalUpdateRequest);
     }
-
 
     @GetMapping("/by-customer-id/{id}")
     @ResponseStatus(HttpStatus.OK)
@@ -58,13 +55,11 @@ public class AnimalController {
         return animalService.getAnimalByName(name);
     }
 
-
     @GetMapping("/by-customer-name")
     @ResponseStatus(HttpStatus.OK)
     public ResultData<List<AnimalGetAllResponse>> getCustomerByName(@RequestParam String name) {
         return animalService.getCustomerByName(name);
     }
-
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
