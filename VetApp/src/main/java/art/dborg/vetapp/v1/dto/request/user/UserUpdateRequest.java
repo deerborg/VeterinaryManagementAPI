@@ -1,4 +1,4 @@
-package art.dborg.vetapp.v1.dto.response.user;
+package art.dborg.vetapp.v1.dto.request.user;
 
 import art.dborg.vetapp.v1.entities.Role;
 import lombok.AllArgsConstructor;
@@ -6,17 +6,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserResponse {
+public class UserUpdateRequest {
     private Long id;
-    private String username;
-    private LocalDate registerDate;
     private List<Role> roles;
-    private boolean enabled;
 }

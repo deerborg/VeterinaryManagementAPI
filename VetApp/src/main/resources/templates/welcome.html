@@ -189,12 +189,39 @@
                 transform: translateY(0);
             }
         }
+        .admin-panel {
+            position: absolute;
+            right: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .admin-panel a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            transition: color 0.3s ease;
+        }
+
+        .admin-panel a:hover {
+            color: deepskyblue;
+        }
+
+        .admin-panel i {
+            margin-right: 8px;
+        }
     </style>
 </head>
 <body>
 <nav class="navbar">
     <div class="logout">
         <a href="/logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    </div>
+    <div class="admin-panel">
+        <a href="/admin/admin"><i class="fas fa-lock"></i> Admin Panel</a>
     </div>
     <ul class="navbar-menu">
         <li class="navbar-item" onclick="toggleSubMenu(this)">

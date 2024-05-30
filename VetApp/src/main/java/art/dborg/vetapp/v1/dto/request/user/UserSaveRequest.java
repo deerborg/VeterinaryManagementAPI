@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Getter
@@ -20,6 +21,8 @@ public class UserSaveRequest {
     private String password;
 
     private List<Role> roles;
+
+    private LocalDate registerDate;
 
     private boolean accountNonExpired = true;
     private boolean accountNonLocked = true;

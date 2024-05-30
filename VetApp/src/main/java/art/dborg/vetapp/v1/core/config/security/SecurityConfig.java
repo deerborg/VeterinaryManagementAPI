@@ -1,6 +1,7 @@
 package art.dborg.vetapp.v1.core.config.security;
 
 import art.dborg.vetapp.v1.core.exception.NotFoundUserPasswordOrUsername;
+import art.dborg.vetapp.v1.entities.Role;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
