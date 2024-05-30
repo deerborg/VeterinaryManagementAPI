@@ -52,4 +52,8 @@ public class PageController {
     public String updateCustomer() {
         return "updateCustomer";
     }
+    @GetMapping("/allAnimal")
+    public String allAnimal() {
+        return "allAnimal";
+    }
 }

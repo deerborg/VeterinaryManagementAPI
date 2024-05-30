@@ -1,5 +1,6 @@
 package art.dborg.vetapp.v1.controller;
 
+import art.dborg.vetapp.v1.dto.response.customer.CustomerAllResponse;
 import art.dborg.vetapp.v1.dto.response.customer.CustomerOnlyIdResponse;
 import art.dborg.vetapp.v1.service.abstracts.CustomerService;
 import art.dborg.vetapp.v1.core.result.Result;
@@ -40,7 +41,7 @@ public class CustomerController {
 
     @PutMapping
     @ResponseStatus(HttpStatus.OK)
-    public ResultData<CustomerResponse> update(@Valid @RequestBody CustomerUpdateRequest customerUpdateRequest){
+    public ResultData<CustomerAllResponse> update(@Valid @RequestBody CustomerUpdateRequest customerUpdateRequest){
         return customerService.updateCustomer(customerUpdateRequest);
     }
 
@@ -65,7 +66,7 @@ public class CustomerController {
         return customerService.getOnlyId();
     }
     @GetMapping("/all-customer")
-    public ResultData<List<CustomerResponse>> getAllCustomer(){
+    public ResultData<List<CustomerAllResponse>> getAllCustomer(){
         return customerService.getAllCustomers();
     }
     @DeleteMapping("/name/{name}")

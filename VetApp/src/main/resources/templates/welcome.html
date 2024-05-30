@@ -29,6 +29,9 @@
             width: 100%;
             box-sizing: border-box;
             text-align: center;
+            display: flex;
+            justify-content: center;
+            position: relative;
         }
         .navbar-menu {
             list-style: none;
@@ -66,16 +69,51 @@
             padding: 10px;
             z-index: 1;
         }
+
         .navbar-item.active .submenu {
             display: block;
         }
+
         .submenu li {
             margin: 5px 0;
+            display: block; /* Ana menüdeki alt öğeleri dikey hizala */
         }
+
         .submenu li a {
             color: white;
             text-decoration: none;
             font-weight: bold;
+            font-size: small;
+            display: block; /* Ana menüdeki alt öğeleri dikey hizala */
+        }
+
+        .submenu li:hover {
+            background-color: #f96e1f; /* Fare üzerine gelindiğinde alt menü öğesinin arka plan rengini değiştir */
+        }
+
+        .submenu li:hover a {
+            color: white; /* Fare üzerine gelindiğinde alt menü öğesinin metin rengini değiştir */
+        }
+        .logout {
+            position: absolute;
+            left: 20px;
+            display: flex;
+            align-items: center;
+        }
+        .logout a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            transition: color 0.3s ease;
+        }
+        .logout a:hover {
+            color: deepskyblue;
+        }
+        .logout i {
+            margin-right: 8px;
         }
         .footer {
             width: 100%;
@@ -155,15 +193,24 @@
 </head>
 <body>
 <nav class="navbar">
+    <div class="logout">
+        <a href="/logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    </div>
     <ul class="navbar-menu">
         <li class="navbar-item" onclick="toggleSubMenu(this)">
             <a href="#">Customer</a>
             <ul class="submenu">
-                <li><a href="customer">Add Customer</a></li>
-                <li><a href="allCustomer">Customers</a></li>
+                <li><a href="customer">Add</a></li>
+                <li><a href="allCustomer">CustomerList</a></li>
             </ul>
         </li>
-        <li class="navbar-item"><a href="animal">Animal</a></li>
+        <li class="navbar-item" onclick="toggleSubMenu(this)">
+            <a href="#">Animal</a>
+            <ul class="submenu">
+                <li><a href="animal">Add</a></li>
+                <li><a href="allAnimal">AnimalList</a></li>
+            </ul>
+        </li>
         <li class="navbar-item"><a href="#">Vaccine</a></li>
         <li class="navbar-item"><a href="#">Appointment</a></li>
         <li class="navbar-item"><a href="#">AvailableDate</a></li>

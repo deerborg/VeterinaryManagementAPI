@@ -5,6 +5,7 @@ import art.dborg.vetapp.v1.dto.request.customer.CustomerSaveRequest;
 import art.dborg.vetapp.v1.dto.request.customer.CustomerUpdateRequest;
 import art.dborg.vetapp.v1.dto.response.animal.AnimalGetAllResponse;
 import art.dborg.vetapp.v1.dto.response.animal.AnimalResponse;
+import art.dborg.vetapp.v1.dto.response.customer.CustomerAllResponse;
 import art.dborg.vetapp.v1.dto.response.customer.CustomerOnlyIdResponse;
 import art.dborg.vetapp.v1.dto.response.customer.CustomerResponse;
 import art.dborg.vetapp.v1.entities.Animal;
@@ -16,7 +17,7 @@ import java.util.List;
 public interface CustomerService {
     ResultData<CustomerResponse> addCustomer(CustomerSaveRequest customer);
 
-    ResultData<CustomerResponse> updateCustomer(CustomerUpdateRequest customer);
+    ResultData<CustomerAllResponse> updateCustomer(CustomerUpdateRequest customer);
 
     ResultData<CustomerResponse> getCustomerById(long id);
 
@@ -28,7 +29,7 @@ public interface CustomerService {
 
     ResultData <List<CustomerOnlyIdResponse>> getOnlyId();
 
-    ResultData<List<CustomerResponse>> getAllCustomers();
+    ResultData<List<CustomerAllResponse>> getAllCustomers();
 
     boolean deleteByName(String name);
 }

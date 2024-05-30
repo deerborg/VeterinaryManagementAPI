@@ -7,6 +7,7 @@ import art.dborg.vetapp.v1.core.utilities.ResultHelper;
 import art.dborg.vetapp.v1.dto.request.customer.CustomerSaveRequest;
 import art.dborg.vetapp.v1.dto.request.customer.CustomerUpdateRequest;
 import art.dborg.vetapp.v1.dto.response.animal.AnimalResponse;
+import art.dborg.vetapp.v1.dto.response.customer.CustomerAllResponse;
 import art.dborg.vetapp.v1.dto.response.customer.CustomerOnlyIdResponse;
 import art.dborg.vetapp.v1.dto.response.customer.CustomerResponse;
 import art.dborg.vetapp.v1.service.abstracts.CustomerService;
@@ -36,9 +37,9 @@ public class CustomerServiceImp implements CustomerService {
     }
 
     @Override
-    public ResultData<CustomerResponse> updateCustomer(CustomerUpdateRequest customer) {
+    public ResultData<CustomerAllResponse> updateCustomer(CustomerUpdateRequest customer) {
         customerRepository.findById(customer.getId()).orElseThrow(() -> new ForUpdateNotFoundIdException(Message.UPDATE_NOT_FOUND_ID));
-        return ResultHelper.OK(mapperService.forResponse().map(customerRepository.save(mapperService.forRequest().map(customer, Customer.class)), CustomerResponse.class));
+        return ResultHelper.OK(mapperService.forResponse().map(customerRepository.save(mapperService.forRequest().map(customer, Customer.class)), CustomerAllResponse.class));
     }
 
     @Override
@@ -77,8 +78,8 @@ public class CustomerServiceImp implements CustomerService {
     }
 
     @Override
-    public ResultData<List<CustomerResponse>> getAllCustomers() {
-        return ResultHelper.OK(customerRepository.findAll().stream().map(customer -> mapperService.forResponse().map(customer, CustomerResponse.class)).collect(Collectors.toList()));
+    public ResultData<List<CustomerAllResponse>> getAllCustomers() {
+        return ResultHelper.OK(customerRepository.findAll().stream().map(customer -> mapperService.forResponse().map(customer, CustomerAllResponse.class)).collect(Collectors.toList()));
     }
 
     @Override

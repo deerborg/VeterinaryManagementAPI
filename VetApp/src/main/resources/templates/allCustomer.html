@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <title>Müşteri Listesi</title>
     <style>
         body {
@@ -27,7 +28,7 @@
         }
 
         .card {
-            width: 300px;
+            width: 400px;
             background-color: rgba(255, 255, 255, 0.99);
             padding: 20px;
             border-radius: 10px;
@@ -59,18 +60,16 @@
         }
 
         li {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
             background-color: rgba(255, 255, 255, 0.99);
-            padding: 10px;
-            margin-bottom: 10px;
-            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         .button-container {
             display: flex;
+            justify-content: center;
         }
 
         button {
@@ -98,36 +97,144 @@
             border-radius: 5px;
             color: white;
         }
+
+        .update-form {
+            display: none;
+            flex-direction: column;
+            padding-top: 20px; /* Arayüzü yukarı doğru genişletmek için */
+            border-top: 1px solid #ddd; /* Arayüzü yukarı doğru genişletmek için */
+        }
+
+        .update-form label {
+            margin: 5px 0;
+            text-align: left;
+            width: 100%;
+            font-weight: bold;
+        }
+
+        .update-form input,
+        .update-form select {
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width: calc(100% - 22px);
+        }
+
+        .update-form button {
+            width: 100%;
+        }
+        .go-back {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .go-back:hover {
+            background-color: #0056b3;
+        }
+        .footer {
+            width: 100%;
+            height: 50px;
+            opacity: 0.9;
+            background-color: orange;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            padding: 10px 0;
+        }
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 10px;
+        }
+        .social-icons a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 24px;
+            transition: color 0.3s ease;
+        }
+        .social-icons a:hover {
+            color: cornflowerblue;
+        }
+        .footer p {
+            margin: 0;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
     </style>
 </head>
 <body>
 <div class="container">
     <div class="card">
-        <h1>Müşteri Listesi</h1>
+        <h1>Customer List</h1>
         <div id="error-message"></div>
         <div id="customerList">
             <ul>
                 <!-- JavaScript ile oluşturulacak müşteri listesi buraya gelecek -->
             </ul>
         </div>
+        <button class="go-back" onclick="goBackMain()">Go Back Main</button>
     </div>
-</div>
 
+</div>
+<div class="footer">
+    <div class="social-icons">
+        <a href="https://github.com/deerborg" target="_blank"><i class="fab fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/ffurkanaydemir/" target="_blank"><i class="fab fa-linkedin"></i></a>
+        <a href="https://www.behance.net/deeborgh" target="_blank"><i class="fab fa-behance"></i></a>
+    </div>
+    <p>deerborg</p>
+</div>
 <script>
-    // JavaScript kodu
+    function goBackMain() {
+        window.location.href = "/welcome";
+    }
     fetch('/v1/customers/all-customer')
         .then(response => response.json())
         .then(data => {
             if (data.status === true) {
                 const customers = data.data;
                 const htmlContent = customers.map(customer => {
-                    return `<li>
-                                <span>${customer.name}</span>
-                                <div class="button-container">
-                                    <button class="delete" data-id="${customer.id}" data-name="${customer.name}">Delete</button>
-                                    <button class="update" data-id="${customer.id}">Update</button>
-                                </div>
-                            </li>`;
+                    return `<li id="customer-${customer.id}">
+                            <span id="customer-name-${customer.id}">${customer.name}</span>
+                            <div class="button-container">
+                                <button class="delete" data-id="${customer.id}" data-name="${customer.name}">Delete</button>
+                                <button class="update" data-id="${customer.id}" data-name="${customer.name}" data-phone="${customer.phone}" data-mail="${customer.mail}" data-city="${customer.city}">Update</button>
+                            </div>
+                            <div class="update-form" id="update-form-${customer.id}" style="display: none;">
+                                <label for="update-name-${customer.id}">Name:</label>
+                                <input type="text" id="update-name-${customer.id}" placeholder="Name" value="${customer.name}">
+
+                                <label for="update-phone-${customer.id}">Phone:</label>
+                                <input type="text" id="update-phone-${customer.id}" placeholder="Phone" value="${customer.phone}">
+
+                                <label for="update-mail-${customer.id}">Mail:</label>
+                                <input type="text" id="update-mail-${customer.id}" placeholder="Mail" value="${customer.mail}">
+
+                                <label for="update-city-${customer.id}">City:</label>
+                                <select id="update-city-${customer.id}">
+                                    <option value="Adana" ${customer.city === 'Adana' ? 'selected' : ''}>Adana</option>
+                                    <option value="Ankara" ${customer.city === 'Ankara' ? 'selected' : ''}>Ankara</option>
+                                    <option value="İstanbul" ${customer.city === 'İstanbul' ? 'selected' : ''}>İstanbul</option>
+                                    <!-- Diğer şehir seçenekleri -->
+                                </select>
+
+                                <button class="save-update" data-id="${customer.id}">Save</button>
+                            </div>
+                        </li>`;
                 }).join("");
                 document.getElementById("customerList").innerHTML = "<ul>" + htmlContent + "</ul>";
 
@@ -154,7 +261,7 @@
                                 if (data.status === true) {
                                     console.log("Müşteri ID'si: ", customerId, " başarıyla silindi.");
                                     // Silinen müşteriyi listeden kaldırma
-                                    this.parentNode.parentNode.remove(); // Butonun bulunduğu <li> öğesini kaldırır
+                                    document.getElementById(`customer-${customerId}`).remove(); // Müşteriyi listeden kaldırır
                                 } else {
                                     console.error("Silme işlemi başarısız oldu: " + data.message);
                                 }
@@ -167,10 +274,76 @@
                 updateButtons.forEach(button => {
                     button.addEventListener("click", function() {
                         const customerId = this.getAttribute("data-id");
-                        // Güncelleme işlemi burada yapılacak
-                        console.log("Müşteri ID'si: ", customerId, " güncellendi.");
-                        // Update butonuna basıldığında updateCustomer sayfasına yönlendirme
-                        window.location.href = `/updateCustomer`;
+                        const updateForm = document.getElementById(`update-form-${customerId}`);
+                        updateForm.style.display = 'block';
+
+                        // "Cancel" butonunu oluştur
+                        const cancelButton = document.createElement("button");
+                        cancelButton.innerText = "Cancel";
+                        cancelButton.classList.add("cancel-update");
+                        cancelButton.setAttribute("data-id", customerId);
+                        cancelButton.style.marginTop = "10px"; // Butonun üstündeki boşluğu ayarla
+                        updateForm.appendChild(cancelButton);
+
+                        // "Cancel" butonuna tıklanınca formu kapat
+                        cancelButton.addEventListener("click", function() {
+                            updateForm.style.display = 'none';
+                            this.remove(); // "Cancel" butonunu kaldır
+                            // "Update" butonunu tekrar etkinleştir
+                            button.disabled = false;
+                        });
+
+                        // "Update" butonunu devre dışı bırak
+                        button.disabled = true;
+                    });
+                });
+                // CustomerAllResponse kısmında hassas verileri silip, service kısmında verileri ekleyebilirsiniz.
+                // Sonrasında JSON olarak hassas verileri kaldırın
+                const saveUpdateButtons = document.querySelectorAll(".save-update");
+                saveUpdateButtons.forEach(button => {
+                    button.addEventListener("click", function() {
+                        const customerId = this.getAttribute("data-id");
+                        const updatedName = document.getElementById(`update-name-${customerId}`).value;
+                        const updatedPhone = document.getElementById(`update-phone-${customerId}`).value;
+                        const updatedMail = document.getElementById(`update-mail-${customerId}`).value;
+                        const updatedCity = document.getElementById(`update-city-${customerId}`).value;
+
+                        fetch(`/v1/customers`, {
+                            method: 'PUT',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                id : customerId,
+                                name: updatedName,
+                                phone: updatedPhone,
+                                mail: updatedMail,
+                                city: updatedCity,
+                                address: "Turkey"
+                            })
+                        })
+                            .then(response => response.json())
+                            .then(data => {
+                                document.getElementById('error-message').innerText = data.message;
+                                document.getElementById('error-message').style.backgroundColor = '#28a745'; // Yeşil arka plan başarılı işlem için
+                                document.getElementById('error-message').style.display = 'block';
+
+                                // 2 saniye bekleyip sayfayı yenileme
+                                setTimeout(() => {
+                                    window.location.reload();
+                                }, 2000);
+
+                                if (data.status === true) {
+                                    console.log("Müşteri ID'si: ", customerId, " başarıyla güncellendi.");
+                                    // Güncellenen verileri formdan alıp listeye yansıtma
+                                    const customerElement = document.getElementById(`customer-name-${customerId}`);
+                                    customerElement.innerText = updatedName;
+                                    document.getElementById(`update-form-${customerId}`).style.display = 'none'; // Formu gizle
+                                } else {
+                                    console.error("Güncelleme işlemi başarısız oldu: " + data.message);
+                                }
+                            })
+                            .catch(error => console.error("Hata oluştu:", error));
                     });
                 });
             } else {
