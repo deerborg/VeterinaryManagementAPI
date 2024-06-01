@@ -1,6 +1,7 @@
 package art.dborg.vetapp.v1.service.concretes;
 
 import art.dborg.vetapp.v1.core.config.modelMapper.ModelMapperService;
+import art.dborg.vetapp.v1.core.result.Result;
 import art.dborg.vetapp.v1.core.result.ResultData;
 import art.dborg.vetapp.v1.core.utilities.ResultHelper;
 import art.dborg.vetapp.v1.dto.request.doctor.DoctorSaveRequest;
@@ -19,6 +20,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * This class implements the DoctorService interface and provides methods for managing doctor entities.
@@ -32,21 +34,21 @@ public class DoctorServiceImp implements DoctorService {
 
     @Override
     public ResultData<DoctorResponse> addDoctor(DoctorSaveRequest doctor) { // Section 15 - Registering a doctor
-        if(doctorRepository.existsByMailOrPhone(doctor.getMail(),doctor.getPhone())){
+        if (doctorRepository.existsByMailOrPhone(doctor.getMail(), doctor.getPhone())) {
             throw new NotUniqueValues(Message.NOT_UNIQUE);
         }
-        return ResultHelper.CREATED(mapperService.forResponse().map(doctorRepository.save(mapperService.forRequest().map(doctor,Doctor.class)),DoctorResponse.class));
+        return ResultHelper.CREATED(mapperService.forResponse().map(doctorRepository.save(mapperService.forRequest().map(doctor, Doctor.class)), DoctorResponse.class));
     }
 
     @Override
     public ResultData<DoctorResponse> updateDoctor(DoctorUpdateRequest doctor) {
-        doctorRepository.findById(doctor.getId()).orElseThrow(()-> new ForUpdateNotFoundIdException(Message.UPDATE_NOT_FOUND_ID));
-        return ResultHelper.OK(mapperService.forResponse().map(doctorRepository.save(mapperService.forRequest().map(doctor,Doctor.class)),DoctorResponse.class));
+        doctorRepository.findById(doctor.getId()).orElseThrow(() -> new ForUpdateNotFoundIdException(Message.UPDATE_NOT_FOUND_ID));
+        return ResultHelper.OK(mapperService.forResponse().map(doctorRepository.save(mapperService.forRequest().map(doctor, Doctor.class)), DoctorResponse.class));
     }
 
     @Override
     public ResultData<DoctorResponse> getDoctorById(long id) {
-        return ResultHelper.OK(mapperService.forResponse().map(doctorRepository.findById(id).orElseThrow(() -> new NotFoundException(Message.NOT_FOUND_ID)),DoctorResponse.class));
+        return ResultHelper.OK(mapperService.forResponse().map(doctorRepository.findById(id).orElseThrow(() -> new NotFoundException(Message.NOT_FOUND_ID)), DoctorResponse.class));
     }
 
     @Override
@@ -56,7 +58,7 @@ public class DoctorServiceImp implements DoctorService {
     }
 
     @Override
-    public ResultData<List<DoctorResponse>> getByCustomerName(String name) {
+    public ResultData<List<DoctorResponse>> getByDoctorName(String name) {
         return null;
     }
 
@@ -66,12 +68,13 @@ public class DoctorServiceImp implements DoctorService {
     }
 
     @Override
-    public ResultData<List<DoctorAllResponse>> getAllCustomers() {
-        return null;
+    public ResultData<List<DoctorAllResponse>> getAllDoctor() {
+        return ResultHelper.OK(doctorRepository.findAll().stream().map(doctor -> mapperService.forResponse().map(doctor, DoctorAllResponse.class)).collect(Collectors.toList()));
     }
 
     @Override
-    public boolean deleteByName(String name) {
-        return false;
+    public Result deleteByName(String name) {
+        doctorRepository.delete(doctorRepository.findByName(name));
+        return new Result(true,"Deleted","201");
     }
 }

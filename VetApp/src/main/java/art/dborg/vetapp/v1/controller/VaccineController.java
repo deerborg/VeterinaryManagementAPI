@@ -67,4 +67,8 @@ public class VaccineController {
     public ResultData<List<VaccineGetAllResponse>> getFilterByStartAndEndDate(@RequestParam("firstDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate firsDate, @RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
         return vaccineService.getFilterByStartAndEndDate(firsDate,endDate);
     }
+    @GetMapping("/all-vaccine")
+    public ResultData<List<VaccineGetAllResponse>> getAllVaccineList() {
+        return vaccineService.getAllVaccine();
+    }
 }

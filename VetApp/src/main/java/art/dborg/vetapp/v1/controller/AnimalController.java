@@ -2,6 +2,7 @@ package art.dborg.vetapp.v1.controller;
 
 import art.dborg.vetapp.v1.dto.request.animal.AnimalNameUpdateRequest;
 import art.dborg.vetapp.v1.dto.response.animal.AnimalListResponse;
+import art.dborg.vetapp.v1.dto.response.animal.AnimalOnlyIdResponse;
 import art.dborg.vetapp.v1.service.abstracts.AnimalService;
 import art.dborg.vetapp.v1.core.result.Result;
 import art.dborg.vetapp.v1.core.result.ResultData;
@@ -76,5 +77,9 @@ public class AnimalController {
     @PutMapping("/update-name")
     public ResultData<AnimalListResponse> updateByAnimalName(@RequestBody AnimalNameUpdateRequest animal){
         return animalService.updateByAnimalName(animal);
+    }
+    @GetMapping("/all-animals-id")
+    public ResultData<List<AnimalOnlyIdResponse>> getAllAnimalsById(){
+        return animalService.getAllIdByAnimals();
     }
 }

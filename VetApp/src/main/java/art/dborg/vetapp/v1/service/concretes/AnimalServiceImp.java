@@ -9,6 +9,7 @@ import art.dborg.vetapp.v1.dto.request.animal.AnimalSaveRequest;
 import art.dborg.vetapp.v1.dto.request.animal.AnimalUpdateRequest;
 import art.dborg.vetapp.v1.dto.response.animal.AnimalGetAllResponse;
 import art.dborg.vetapp.v1.dto.response.animal.AnimalListResponse;
+import art.dborg.vetapp.v1.dto.response.animal.AnimalOnlyIdResponse;
 import art.dborg.vetapp.v1.dto.response.animal.AnimalResponse;
 import art.dborg.vetapp.v1.service.abstracts.AnimalService;
 import art.dborg.vetapp.v1.core.exception.ForUpdateNotFoundIdException;
@@ -102,6 +103,11 @@ public class AnimalServiceImp implements AnimalService {
         Animal savedAnimal = animalRepository.save(updateAnimal);
         AnimalListResponse animalListResponse = mapperService.forResponse().map(savedAnimal,AnimalListResponse.class);
         return ResultHelper.OK(animalListResponse);
+    }
+
+    @Override
+    public ResultData<List<AnimalOnlyIdResponse>> getAllIdByAnimals() {
+        return ResultHelper.OK(animalRepository.findAll().stream().map(a -> mapperService.forResponse().map(a,AnimalOnlyIdResponse.class)).collect(Collectors.toList()));
     }
 
     public void checkCustomerId(Animal animal){

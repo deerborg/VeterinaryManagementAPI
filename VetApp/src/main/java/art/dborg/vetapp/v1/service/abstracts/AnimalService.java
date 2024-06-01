@@ -6,6 +6,7 @@ import art.dborg.vetapp.v1.dto.request.animal.AnimalSaveRequest;
 import art.dborg.vetapp.v1.dto.request.animal.AnimalUpdateRequest;
 import art.dborg.vetapp.v1.dto.response.animal.AnimalGetAllResponse;
 import art.dborg.vetapp.v1.dto.response.animal.AnimalListResponse;
+import art.dborg.vetapp.v1.dto.response.animal.AnimalOnlyIdResponse;
 import art.dborg.vetapp.v1.dto.response.animal.AnimalResponse;
 
 import java.util.List;
@@ -30,4 +31,6 @@ public interface AnimalService {
     ResultData<AnimalListResponse> updateByAnimalName(AnimalNameUpdateRequest animal);
 
     boolean delete(long id);
+
+    ResultData<List<AnimalOnlyIdResponse>> getAllIdByAnimals();
 }

@@ -103,7 +103,7 @@ select {
     margin-top: 10px; /* Go Back butonunu formun altından 20 piksel aşağıya yerleştirir */
     background-color: grey;
 }
-#goAddAnimalButton{
+#goAddButton{
     margin-top: 10px;
     background-color: orange;
 }

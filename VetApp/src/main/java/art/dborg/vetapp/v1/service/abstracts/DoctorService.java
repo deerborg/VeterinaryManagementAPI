@@ -1,5 +1,6 @@
 package art.dborg.vetapp.v1.service.abstracts;
 
+import art.dborg.vetapp.v1.core.result.Result;
 import art.dborg.vetapp.v1.core.result.ResultData;
 import art.dborg.vetapp.v1.dto.request.doctor.DoctorSaveRequest;
 import art.dborg.vetapp.v1.dto.request.doctor.DoctorUpdateRequest;
@@ -22,11 +23,11 @@ public interface DoctorService {
 
     boolean delete(long id);
 
-    ResultData<List<DoctorResponse>> getByCustomerName(String name);
+    ResultData<List<DoctorResponse>> getByDoctorName(String name);
 
     ResultData <List<DoctorOnlyIdResponse>> getOnlyId();
 
-    ResultData<List<DoctorAllResponse>> getAllCustomers();
+    ResultData<List<DoctorAllResponse>> getAllDoctor();
 
-    boolean deleteByName(String name);
+    Result deleteByName(String name);
 }

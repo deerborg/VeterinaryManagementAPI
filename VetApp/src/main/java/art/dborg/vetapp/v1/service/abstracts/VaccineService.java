@@ -24,4 +24,6 @@ public interface VaccineService {
     ResultData<List<VaccineGetAllResponse>> getAnimalVaccineList(long id);
 
     ResultData<List<VaccineGetAllResponse>> getFilterByStartAndEndDate(LocalDate startDate,LocalDate endDate);
+
+    ResultData<List<VaccineGetAllResponse>> getAllVaccine();
 }

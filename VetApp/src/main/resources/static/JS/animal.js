@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // Go Add Animal butonunun tıklanma olayını dinleme
-    document.getElementById('goAddAnimalButton').addEventListener('click', function () {
+    document.getElementById('goAddButton').addEventListener('click', function () {
         // Animal sayfasına yönlendirme
         window.location.href = '/animal';
     });

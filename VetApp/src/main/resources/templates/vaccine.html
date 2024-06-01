@@ -2,10 +2,39 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Vaccine</title>
     <link rel="stylesheet" href="/css/vaccine.css">
-    <title>Title</title>
 </head>
 <body>
-<script src="/JS/vaccine.js"></script>
+<div class="container">
+    <div class="card">
+        <h2>Add Vaccine</h2>
+        <form id="vaccineForm">
+            <label for="name">Vaccine Name</label>
+            <input type="text" id="name" placeholder="Enter vaccine name">
+
+            <label for="code">Vaccine Code</label>
+            <input type="text" id="code" placeholder="Enter coce">
+
+            <label for="startDate">Start Date</label>
+            <input type="date" id="startDate">
+
+            <label for="endDate">End Date</label>
+            <input type="date" id="endDate">
+
+            <label for="animal">Animal's ID</label>
+            <select id="animal"></select>
+
+            <button type="submit">Register</button>
+            <!-- Hata mesajı gösterimi -->
+            <div id="error-message" class="error-message"></div>
+        </form>
+        <button id="goBackButton">Go Back</button>
+        <button id="goAddButton">Go Add Vaccine</button>
+    </div>
+    <script src="/JS/vaccine.js"></script>
+</div>
 </body>
 </html>
+

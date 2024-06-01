@@ -102,4 +102,8 @@ public class VaccineServiceImp implements VaccineService {
         return ResultHelper.OK(vaccineRepository.findByEndDateBetween(firstDate, endDate).stream().map(vaccine -> mapperService.forResponse().map(vaccine, VaccineGetAllResponse.class)).collect(Collectors.toList()));
     }
 
+    @Override
+    public ResultData<List<VaccineGetAllResponse>> getAllVaccine() {
+        return ResultHelper.OK(vaccineRepository.findAll().stream().map(vaccine -> mapperService.forResponse().map(vaccine,VaccineGetAllResponse.class)).collect(Collectors.toList()));
+    }
 }

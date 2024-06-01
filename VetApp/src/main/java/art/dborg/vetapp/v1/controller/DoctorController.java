@@ -1,5 +1,6 @@
 package art.dborg.vetapp.v1.controller;
 
+import art.dborg.vetapp.v1.dto.response.doctor.DoctorAllResponse;
 import art.dborg.vetapp.v1.service.abstracts.DoctorService;
 import art.dborg.vetapp.v1.core.result.Result;
 import art.dborg.vetapp.v1.core.result.ResultData;
@@ -13,6 +14,8 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * Controller class for managing doctors.
@@ -45,5 +48,13 @@ public class DoctorController {
     @ResponseStatus(HttpStatus.OK)
     public Result delete(@PathVariable("id") long id) {
         return ResultHelper.OK(doctorService.delete(id));
+    }
+    @GetMapping("/all-doctor")
+    public ResultData<List<DoctorAllResponse>> getAllDoctor(){
+        return doctorService.getAllDoctor();
+    }
+    @DeleteMapping("/name/{name}")
+    public Result deleteDoctor(@PathVariable("name") String name) {
+        return doctorService.deleteByName(name);
     }
 }

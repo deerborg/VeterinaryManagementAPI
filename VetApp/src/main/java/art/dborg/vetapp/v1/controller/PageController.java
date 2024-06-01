@@ -57,6 +57,10 @@ public class PageController {
     public String allAnimal() {
         return "allAnimal";
     }
+    @GetMapping("/allDoctor")
+    public String allDoctor() {
+        return "allDoctor";
+    }
 
 
 }

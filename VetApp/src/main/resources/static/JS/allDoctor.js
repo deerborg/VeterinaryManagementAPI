@@ -1,7 +1,7 @@
 function goBackMain() {
     window.location.href = "/welcome";
 }
-fetch('/v1/customers/all-customer')
+fetch('/v1/doctors/all-doctor')
     .then(response => response.json())
     .then(data => {
         if (data.status === true) {
@@ -40,10 +40,10 @@ fetch('/v1/customers/all-customer')
             const deleteButtons = document.querySelectorAll(".delete");
             deleteButtons.forEach(button => {
                 button.addEventListener("click", function() {
-                    const customerId = this.getAttribute("data-id");
-                    const customerName = this.getAttribute("data-name");
+                    const doctorId = this.getAttribute("data-id");
+                    const doctorName = this.getAttribute("data-name");
                     // Silme isteği gönderme
-                    fetch(`/v1/doctors/name/${customerName}`, {
+                    fetch(`/v1/doctors/name/${doctorName}`, {
                         method: 'DELETE'
                     })
                         .then(response => response.json())
@@ -58,9 +58,9 @@ fetch('/v1/customers/all-customer')
                             }, 2000);
 
                             if (data.status === true) {
-                                console.log("Müşteri ID'si: ", customerId, " başarıyla silindi.");
+                                console.log("Müşteri ID'si: ", doctorId, " başarıyla silindi.");
                                 // Silinen müşteriyi listeden kaldırma
-                                document.getElementById(`customer-${customerId}`).remove(); // Müşteriyi listeden kaldırır
+                                document.getElementById(`customer-${doctorId}`).remove(); // Müşteriyi listeden kaldırır
                             } else {
                                 console.error("Silme işlemi başarısız oldu: " + data.message);
                             }
