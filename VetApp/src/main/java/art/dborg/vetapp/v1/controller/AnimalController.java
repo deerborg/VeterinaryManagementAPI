@@ -1,5 +1,7 @@
 package art.dborg.vetapp.v1.controller;
 
+import art.dborg.vetapp.v1.dto.request.animal.AnimalNameUpdateRequest;
+import art.dborg.vetapp.v1.dto.response.animal.AnimalListResponse;
 import art.dborg.vetapp.v1.service.abstracts.AnimalService;
 import art.dborg.vetapp.v1.core.result.Result;
 import art.dborg.vetapp.v1.core.result.ResultData;
@@ -65,5 +67,14 @@ public class AnimalController {
     @ResponseStatus(HttpStatus.OK)
     public Result delete(@PathVariable long id){
         return ResultHelper.DELETE(animalService.delete(id));
+    }
+
+    @GetMapping("/all-animals")
+    public ResultData<List<AnimalListResponse>> getAllAnimal(){
+        return animalService.getAnimalList();
+    }
+    @PutMapping("/update-name")
+    public ResultData<AnimalListResponse> updateByAnimalName(@RequestBody AnimalNameUpdateRequest animal){
+        return animalService.updateByAnimalName(animal);
     }
 }

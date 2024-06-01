@@ -39,6 +39,9 @@ public class Animal {
     @Temporal(TemporalType.DATE)
     private LocalDate dateOfBirth;
 
+    @Column(name = "animal_age")
+    private Integer age;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "animal_customer_id", referencedColumnName = "customer_id")
     private Customer customer; // Owner of the animal

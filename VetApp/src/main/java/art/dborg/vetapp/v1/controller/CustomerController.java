@@ -11,14 +11,13 @@ import art.dborg.vetapp.v1.dto.request.customer.CustomerSaveRequest;
 import art.dborg.vetapp.v1.dto.request.customer.CustomerUpdateRequest;
 import art.dborg.vetapp.v1.dto.response.animal.AnimalResponse;
 import art.dborg.vetapp.v1.dto.response.customer.CustomerResponse;
-import art.dborg.vetapp.v1.entities.Customer;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
+
 
 @RestController
 @RequestMapping("/v1/customers")

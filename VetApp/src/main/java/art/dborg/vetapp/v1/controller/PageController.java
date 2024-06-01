@@ -9,17 +9,17 @@ public class PageController {
 
     @GetMapping("/login")
     public String login() {
-        return "login"; // login.html sayfasını dönecek
+        return "login";
     }
 
     @GetMapping("/register")
     public String register() {
-        return "register"; // register.html sayfasını dönecek
+        return "register";
     }
 
     @GetMapping("/welcome")
     public String welcome() {
-        return "welcome"; // welcome.html sayfasını dönecek
+        return "welcome";
     }
     @GetMapping("/customer")
     public String customer() {
@@ -57,5 +57,6 @@ public class PageController {
     public String allAnimal() {
         return "allAnimal";
     }
+
 
 }

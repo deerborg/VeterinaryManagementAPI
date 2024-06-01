@@ -23,5 +23,7 @@ public class AnimalGetAllResponse {
 
     private LocalDate dateOfBirth; // Date of birth of the animal
 
+    private Integer age;
+
     private Customer customer; // Customer who owns the animal
 }

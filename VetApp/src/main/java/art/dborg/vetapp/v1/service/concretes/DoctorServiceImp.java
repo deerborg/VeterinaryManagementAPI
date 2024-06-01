@@ -5,6 +5,8 @@ import art.dborg.vetapp.v1.core.result.ResultData;
 import art.dborg.vetapp.v1.core.utilities.ResultHelper;
 import art.dborg.vetapp.v1.dto.request.doctor.DoctorSaveRequest;
 import art.dborg.vetapp.v1.dto.request.doctor.DoctorUpdateRequest;
+import art.dborg.vetapp.v1.dto.response.doctor.DoctorAllResponse;
+import art.dborg.vetapp.v1.dto.response.doctor.DoctorOnlyIdResponse;
 import art.dborg.vetapp.v1.dto.response.doctor.DoctorResponse;
 import art.dborg.vetapp.v1.service.abstracts.DoctorService;
 import art.dborg.vetapp.v1.core.exception.ForUpdateNotFoundIdException;
@@ -15,6 +17,8 @@ import art.dborg.vetapp.v1.dao.DoctorRepository;
 import art.dborg.vetapp.v1.entities.Doctor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * This class implements the DoctorService interface and provides methods for managing doctor entities.
@@ -49,5 +53,25 @@ public class DoctorServiceImp implements DoctorService {
     public boolean delete(long id) {
         doctorRepository.findById(id).orElseThrow(() -> new NotFoundException(Message.NOT_FOUND_ID));
         return true;
+    }
+
+    @Override
+    public ResultData<List<DoctorResponse>> getByCustomerName(String name) {
+        return null;
+    }
+
+    @Override
+    public ResultData<List<DoctorOnlyIdResponse>> getOnlyId() {
+        return null;
+    }
+
+    @Override
+    public ResultData<List<DoctorAllResponse>> getAllCustomers() {
+        return null;
+    }
+
+    @Override
+    public boolean deleteByName(String name) {
+        return false;
     }
 }

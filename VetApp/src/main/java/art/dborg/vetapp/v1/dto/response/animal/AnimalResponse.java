@@ -21,4 +21,6 @@ public class AnimalResponse {
     private String colour; // Colour of the animal
 
     private LocalDate dateOfBirth; // Date of birth of the animal
+
+    private Integer age;
 }

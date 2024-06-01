@@ -30,6 +30,8 @@ public class AnimalSaveRequest {
     @NotNull(message = "Animal birth date cannot be null.")
     private LocalDate dateOfBirth; // Date of birth of the animal
 
+    private Integer age;
+
     @NotNull(message = "Animal customer ID cannot be null.")
     private Customer customer; // ID of the customer who owns the animal
 }

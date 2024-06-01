@@ -1,0 +1,206 @@
+body {
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #f4f4f4;
+    background-image: url('https://wallsneedlove.com/cdn/shop/products/w0559_1s_Lush-Jungle-Night-Leopard-Wallpaper-Midnight-Prowl_Repeating-Pattern-Sample-1_2c294bb2-90b0-49bd-8838-024398cd62c6.jpg?v=1604087705'); /* Arka plan resminin URL'sini buraya ekleyin */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+.navbar {
+    background-color: orange;
+    color: #fff;
+    opacity: 0.9;
+    padding: 20px 0;
+    font-family: 'Montserrat', sans-serif;
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+.navbar-menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+.navbar-item {
+    margin-right: 20px;
+    position: relative;
+}
+.navbar-item:last-child {
+    margin-right: 0;
+}
+.navbar-item a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+.navbar-item a:hover {
+    color: deepskyblue;
+}
+.submenu {
+    display: none;
+    position: absolute;
+    top: calc(100% + 5px);
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: orange;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    padding: 10px;
+    z-index: 1;
+}
+
+.navbar-item.active .submenu {
+    display: block;
+}
+
+.submenu li {
+    margin: 5px 0;
+    display: block; /* Ana menüdeki alt öğeleri dikey hizala */
+}
+
+.submenu li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: small;
+    display: block; /* Ana menüdeki alt öğeleri dikey hizala */
+}
+
+.submenu li:hover {
+    background-color: #f96e1f; /* Fare üzerine gelindiğinde alt menü öğesinin arka plan rengini değiştir */
+}
+
+.submenu li:hover a {
+    color: white; /* Fare üzerine gelindiğinde alt menü öğesinin metin rengini değiştir */
+}
+.logout {
+    position: absolute;
+    left: 20px;
+    display: flex;
+    align-items: center;
+}
+.logout a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    transition: color 0.3s ease;
+}
+.logout a:hover {
+    color: deepskyblue;
+}
+.logout i {
+    margin-right: 8px;
+}
+.footer {
+    width: 100%;
+    height: 50px;
+    opacity: 0.9;
+    background-color: orange;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 10px 0;
+}
+.social-icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 10px;
+}
+.social-icons a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 10px;
+    font-size: 24px;
+    transition: color 0.3s ease;
+}
+.social-icons a:hover {
+    color: cornflowerblue;
+}
+.footer p {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 500;
+}
+h1 {
+    color: transparent;
+    text-align: center;
+    margin: 60px 0 20px 0;
+    animation: appear 2s forwards, slide 3s infinite alternate;
+    animation-delay: 1s;
+}
+.info-card {
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    max-width: 400px;
+    text-align: center;
+}
+@keyframes appear {
+    0% {
+        letter-spacing: -0.5em;
+    }
+    20% {
+        letter-spacing: 0.2em;
+    }
+    100% {
+        color: white;
+        letter-spacing: normal;
+    }
+}
+@keyframes slide {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(10px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+.admin-panel {
+    position: absolute;
+    right: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.admin-panel a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    transition: color 0.3s ease;
+}
+
+.admin-panel a:hover {
+    color: deepskyblue;
+}
+
+.admin-panel i {
+    margin-right: 8px;
+}

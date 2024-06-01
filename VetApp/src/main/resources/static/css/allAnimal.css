@@ -1,0 +1,167 @@
+body {
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #f4f4f4;
+    background-image: url('https://wallsneedlove.com/cdn/shop/products/w0596_1s_Blue-and-coral-bohemian-eclectic-tiger-wallpaper-Feline-Fatale_Repeating-Pattern-Sample-1b.jpg?v=1635528454');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.card {
+    width: 400px;
+    background-color: rgba(255, 255, 255, 0.99);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    animation: slideOpacity 3s infinite alternate;
+}
+
+@keyframes slideOpacity {
+    0% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    100% {
+        opacity: 0.90;
+        transform: translateY(10px);
+    }
+}
+
+h1 {
+    color: #007BFF;
+    margin-bottom: 20px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+li {
+    background-color: rgba(255, 255, 255, 0.99);
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+}
+
+button {
+    margin-left: 5px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button.delete {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+button.update {
+    background-color: #007bff;
+    color: #fff;
+}
+
+#error-message {
+    display: none;
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    color: white;
+}
+
+.update-form {
+    display: none;
+    flex-direction: column;
+    padding-top: 20px; /* Arayüzü yukarı doğru genişletmek için */
+    border-top: 1px solid #ddd; /* Arayüzü yukarı doğru genişletmek için */
+}
+
+.update-form label {
+    margin: 5px 0;
+    text-align: left;
+    width: 100%;
+    font-weight: bold;
+}
+
+.update-form input,
+.update-form select {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: calc(100% - 22px);
+}
+
+.update-form button {
+    width: 100%;
+}
+.go-back {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.go-back:hover {
+    background-color: #0056b3;
+}
+.footer {
+    width: 100%;
+    height: 50px;
+    opacity: 0.9;
+    background-color: orange;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 10px 0;
+}
+.social-icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 10px;
+}
+.social-icons a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 10px;
+    font-size: 24px;
+    transition: color 0.3s ease;
+}
+.social-icons a:hover {
+    color: cornflowerblue;
+}
+.footer p {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 500;
+}
