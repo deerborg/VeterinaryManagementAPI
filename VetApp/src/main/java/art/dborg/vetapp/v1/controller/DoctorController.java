@@ -1,6 +1,7 @@
 package art.dborg.vetapp.v1.controller;
 
 import art.dborg.vetapp.v1.dto.response.doctor.DoctorAllResponse;
+import art.dborg.vetapp.v1.dto.response.doctor.DoctorOnlyIdResponse;
 import art.dborg.vetapp.v1.service.abstracts.DoctorService;
 import art.dborg.vetapp.v1.core.result.Result;
 import art.dborg.vetapp.v1.core.result.ResultData;
@@ -56,5 +57,9 @@ public class DoctorController {
     @DeleteMapping("/name/{name}")
     public Result deleteDoctor(@PathVariable("name") String name) {
         return doctorService.deleteByName(name);
+    }
+    @GetMapping("/all-doctor-id")
+    public ResultData<List<DoctorOnlyIdResponse>> getAllDoctorsId(){
+        return doctorService.getByDoctorsId();
     }
 }

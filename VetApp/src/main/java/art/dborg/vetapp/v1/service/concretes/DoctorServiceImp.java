@@ -77,4 +77,9 @@ public class DoctorServiceImp implements DoctorService {
         doctorRepository.delete(doctorRepository.findByName(name));
         return new Result(true,"Deleted","201");
     }
+
+    @Override
+    public ResultData<List<DoctorOnlyIdResponse>> getByDoctorsId() {
+        return ResultHelper.OK(doctorRepository.findAll().stream().map(doctor -> mapperService.forResponse().map(doctor, DoctorOnlyIdResponse.class)).collect(Collectors.toList()));
+    }
 }

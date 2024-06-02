@@ -30,4 +30,6 @@ public interface DoctorService {
     ResultData<List<DoctorAllResponse>> getAllDoctor();
 
     Result deleteByName(String name);
+
+    ResultData<List<DoctorOnlyIdResponse>> getByDoctorsId();
 }
