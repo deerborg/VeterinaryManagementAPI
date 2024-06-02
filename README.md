@@ -9,11 +9,31 @@ This project has been developed using the following technologies:
 - **Java (JDK 22)**
 - **Spring Boot**
 - **Spring Data JPA**
+- **Spring MVC**
 - **Spring Security**
 - **ModelMapper**
 - **Lombok**
 - **Hibernate**
 - **Maven**
+
+## DEMO IMAGES
+**Login**
+<img src ="assets/login.png"/>
+
+**Register**
+<img src ="assets/register.png"/>
+
+**Main**
+<img src ="assets/main.png"/>
+
+**Panel**
+<img src ="assets/management_panel.png"/>
+
+**Create**
+<img src ="assets/create_model_form.png"/>
+
+**Update-Delete**
+<img src ="assets/update_delete_model_form.png"/>
 
 ## Project Structure
 
