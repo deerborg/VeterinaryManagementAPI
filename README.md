@@ -1,22 +1,124 @@
-# VetApp v1
+# Veterinary Management API
 
-VetApp is a web application that assists veterinarians and veterinary clinics in managing customer, animal, appointment, and vaccine information.
+## Overview
+This project is a Veterinary Management API designed to manage various aspects of a veterinary practice, including appointments, doctors, customers, and animal records. The project is implemented in Java and follows a RESTful architecture.
 
-## Technologies
+## Project Structure
+The project is organized into several packages, each serving a different purpose. Here is an overview of the key packages and their functionalities:
 
-This project has been developed using the following technologies:
+- **Core Configuration**
+    - Security: Contains security configurations.
+    - Web Config: Configurations for the web layer.
+    - Model Mapper: Configurations for model mapping.
 
-- **Java (JDK 22)**
-- **Spring Boot**
-- **Spring Data JPA**
-- **Spring MVC**
-- **Spring Security**
-- **ModelMapper**
-- **Lombok**
-- **Hibernate**
-- **Maven**
+- **Exceptions**
+    - Defines custom exceptions for various error scenarios such as:
+        - AppointmentAlreadyExists
+        - NotFoundAnimalException
+        - And others.
 
-## DEMO IMAGES
+- **Controllers**
+    - Handles incoming HTTP requests and maps them to appropriate service methods. Key controllers include:
+        - CustomerController
+        - DoctorController
+        - AppointmentController
+        - And others.
+
+- **Services**
+    - Contains business logic and service methods. Key services include:
+        - CustomerService
+        - DoctorService
+        - AppointmentService
+        - And others.
+
+- **Models**
+    - Defines the data models for the application. Key models include:
+        - Customer
+        - Doctor
+        - Appointment
+        - And others.
+
+- **Repositories**
+    - Interfaces for CRUD operations on data models. Key repositories include:
+        - CustomerRepository
+        - DoctorRepository
+        - AppointmentRepository
+        - And others.
+
+- **Configurations**
+    - Contains configuration classes for various aspects of the application. Key configurations include:
+        - SecurityConfig
+        - WebConfigurer
+        - ModelMapperConfig
+        - And others.
+
+## How to Run
+1. Clone the repository.
+2. Navigate to the project directory.
+3. Build the project using Maven:
+   ```bash
+   mvn clean install
+   ```
+4. Run the application:
+   ```bash
+   mvn spring-boot:run
+   ```
+
+## Dependencies
+- Spring Boot
+- Spring Security
+- Spring MVC
+- Spring Data JPA
+- Validation
+- Lombok
+- ModelMapper
+- Hibernate
+- JPA
+
+## Endpoints
+Here is a list of key endpoints provided by the API:
+
+- **Customer**
+    - `GET /customers`: Get all customers.
+    - `POST /customers`: Create a new customer.
+    - `GET /customers/{id}`: Get customer by ID.
+
+- **Doctor**
+    - `GET /doctors`: Get all doctors.
+    - `POST /doctors`: Create a new doctor.
+    - `GET /doctors/{id}`: Get doctor by ID.
+
+- **Appointments**
+    - `GET /appointments`: Get all appointments.
+    - `POST /appointments`: Create a new appointment.
+    - `GET /appointments/{id}`: Get appointment by ID.
+
+- **Animals**
+    - `GET /animals`: Get all animals.
+    - `POST /animals`: Create a new animal record.
+    - `GET /animals/{id}`: Get animal by ID.
+
+## Error Handling
+The application uses a global exception handler to manage errors and provide meaningful responses to the client.
+
+## Interface
+
+In this project, MVC (Model-View-Controller) architecture is used. The interface components are located under a "resources" folder, which contains HTML, CSS, and JavaScript files. According to the MVC architecture:
+
+- **Model:** Data models and business logic reside here.
+- **View:** User interface components are found here. These components include HTML files and associated CSS and JavaScript files.
+- **Controller:** Controllers are used to handle incoming requests and manage interaction between the model and view.
+
+To access the interface components of the project, you can follow these steps:
+
+1. Navigate to the "resources" folder in the project directory.
+2. Inside this folder, you will find model, view, and controller components according to the MVC structure.
+3. You can start using the interface by opening the relevant HTML, CSS, and JavaScript files in a web browser.
+
+If you have any questions or feedback regarding the interface of the project, please feel free to contact us.
+
+**DEMO IMAGES:**
+
 **Login**
 <img src ="assets/login.png"/>
 
@@ -35,58 +137,6 @@ This project has been developed using the following technologies:
 **Update-Delete**
 <img src ="assets/update_delete_model_form.png"/>
 
-## Project Structure
 
-The project consists of the following packages and classes:
-
-| Package/Class                     | Description                            |
-|-----------------------------------|----------------------------------------|
-| `api`                             | Contains Restful APIs.                 |
-| `business.abstracts`              | Contains business service interfaces.  |
-| `core.config.modelMapper`         | Contains ModelMapper configurations.   |
-| `core.result`                     | Contains helper classes for creating API results. |
-| `core.utilities`                  | Contains utility classes.              |
-| `dto.request`                     | Contains data transfer objects for API requests. |
-| `dto.response`                    | Contains data transfer objects for API responses. |
-| `entities`                        | Contains entity classes for the database. |
-
-## Endpoints
-
-| Endpoint                           | Description                            |
-|------------------------------------|----------------------------------------|
-| POST /v1/appointments              | Adds a new appointment.                |
-| PUT /v1/appointments               | Updates an existing appointment.       |
-| GET /v1/appointments/{id}         | Retrieves an appointment by the specified ID. |
-| DELETE /v1/appointments/{id}      | Deletes an appointment by the specified ID. |
-| GET /v1/appointments/appointments-date-doctor | Filters appointments by a specified date range and doctor. |
-| GET /v1/appointments/appointments-date-animal | Filters appointments by a specified date range and animal. |
-| POST /v1/available-dates           | Adds a new available date.            |
-| PUT /v1/available-dates            | Updates an existing available date.   |
-| GET /v1/available-dates/{id}      | Retrieves an available date by the specified ID. |
-| DELETE /v1/available-dates/{id}   | Deletes an available date by the specified ID. |
-| POST /v1/customers                 | Adds a new customer.                  |
-| GET /v1/customers/{id}            | Retrieves a customer by the specified ID. |
-| PUT /v1/customers                  | Updates an existing customer.          |
-| DELETE /v1/customers/{id}         | Deletes a customer by the specified ID. |
-| GET /v1/customers                  | Retrieves customers by their names.    |
-| GET /v1/customers/by-animal-list/{id} | Retrieves customers by a specified animal. |
-| POST /v1/doctors                   | Adds a new doctor.                    |
-| GET /v1/doctors/{id}              | Retrieves a doctor by the specified ID. |
-| PUT /v1/doctors                    | Updates an existing doctor.           |
-| DELETE /v1/doctors/{id}           | Deletes a doctor by the specified ID. |
-| POST /v1/vaccines                  | Adds a new vaccine.                   |
-| PUT /v1/vaccines                   | Updates an existing vaccine.          |
-| GET /v1/vaccines/{id}             | Retrieves a vaccine by the specified ID. |
-| DELETE /v1/vaccines/{id}          | Deletes a vaccine by the specified ID. |
-| GET /v1/vaccines/animal/{id}      | Retrieves vaccines by a specified animal. |
-| GET /v1/vaccines/end-date          | Filters vaccines by a specified end date. |
-
-
-## UML
-<img src ="Veterinary_Uml_Diagram.png"/>
-
-
-## Installation and Usage
-
-Clone the project to your local machine. Then, open the project in a Java IDE (such as IntelliJ IDEA or Eclipse) and install Maven dependencies. Start the project and use a REST client to test the APIs.
-
+## License
+This project is licensed under the MIT License.
