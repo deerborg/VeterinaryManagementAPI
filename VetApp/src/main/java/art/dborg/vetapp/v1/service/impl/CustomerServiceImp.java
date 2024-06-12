@@ -1,20 +1,18 @@
-package art.dborg.vetapp.v1.service.concretes;
+package art.dborg.vetapp.v1.service.impl;
 
 import art.dborg.vetapp.v1.core.config.modelMapper.ModelMapperService;
-import art.dborg.vetapp.v1.core.exception.NullPointerException;
 import art.dborg.vetapp.v1.core.result.ResultData;
 import art.dborg.vetapp.v1.core.utilities.ResultHelper;
 import art.dborg.vetapp.v1.dto.request.customer.CustomerSaveRequest;
 import art.dborg.vetapp.v1.dto.request.customer.CustomerUpdateRequest;
 import art.dborg.vetapp.v1.dto.response.animal.AnimalResponse;
-import art.dborg.vetapp.v1.dto.response.customer.CustomerAllResponse;
+import art.dborg.vetapp.v1.dto.response.customer.CustomersResponse;
 import art.dborg.vetapp.v1.dto.response.customer.CustomerOnlyIdResponse;
 import art.dborg.vetapp.v1.dto.response.customer.CustomerResponse;
-import art.dborg.vetapp.v1.service.abstracts.CustomerService;
+import art.dborg.vetapp.v1.service.interfaces.CustomerService;
 import art.dborg.vetapp.v1.core.exception.*;
 import art.dborg.vetapp.v1.core.utilities.Message;
 import art.dborg.vetapp.v1.dao.CustomerRepository;
-import art.dborg.vetapp.v1.entities.Animal;
 import art.dborg.vetapp.v1.entities.Customer;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -37,9 +35,9 @@ public class CustomerServiceImp implements CustomerService {
     }
 
     @Override
-    public ResultData<CustomerAllResponse> updateCustomer(CustomerUpdateRequest customer) {
+    public ResultData<CustomersResponse> updateCustomer(CustomerUpdateRequest customer) {
         customerRepository.findById(customer.getId()).orElseThrow(() -> new ForUpdateNotFoundIdException(Message.UPDATE_NOT_FOUND_ID));
-        return ResultHelper.OK(mapperService.forResponse().map(customerRepository.save(mapperService.forRequest().map(customer, Customer.class)), CustomerAllResponse.class));
+        return ResultHelper.OK(mapperService.forResponse().map(customerRepository.save(mapperService.forRequest().map(customer, Customer.class)), CustomersResponse.class));
     }
 
     @Override
@@ -78,8 +76,8 @@ public class CustomerServiceImp implements CustomerService {
     }
 
     @Override
-    public ResultData<List<CustomerAllResponse>> getAllCustomers() {
-        return ResultHelper.OK(customerRepository.findAll().stream().map(customer -> mapperService.forResponse().map(customer, CustomerAllResponse.class)).collect(Collectors.toList()));
+    public ResultData<List<CustomersResponse>> getAllCustomers() {
+        return ResultHelper.OK(customerRepository.findAll().stream().map(customer -> mapperService.forResponse().map(customer, CustomersResponse.class)).collect(Collectors.toList()));
     }
 
     @Override

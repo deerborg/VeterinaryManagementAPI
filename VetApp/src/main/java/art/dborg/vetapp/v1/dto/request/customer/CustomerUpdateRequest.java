@@ -2,13 +2,10 @@ package art.dborg.vetapp.v1.dto.request.customer;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
+@Getter
+@Setter
 public class CustomerUpdateRequest {
     @NotNull(message = "ID cannot be null.")
     private long id; // ID of the customer to be updated

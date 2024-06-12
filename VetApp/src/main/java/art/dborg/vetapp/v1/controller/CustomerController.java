@@ -1,11 +1,10 @@
 package art.dborg.vetapp.v1.controller;
 
-import art.dborg.vetapp.v1.dto.response.customer.CustomerAllResponse;
+import art.dborg.vetapp.v1.dto.response.customer.CustomersResponse;
 import art.dborg.vetapp.v1.dto.response.customer.CustomerOnlyIdResponse;
-import art.dborg.vetapp.v1.service.abstracts.CustomerService;
+import art.dborg.vetapp.v1.service.interfaces.CustomerService;
 import art.dborg.vetapp.v1.core.result.Result;
 import art.dborg.vetapp.v1.core.result.ResultData;
-import art.dborg.vetapp.v1.core.config.modelMapper.ModelMapperService;
 import art.dborg.vetapp.v1.core.utilities.ResultHelper;
 import art.dborg.vetapp.v1.dto.request.customer.CustomerSaveRequest;
 import art.dborg.vetapp.v1.dto.request.customer.CustomerUpdateRequest;
@@ -40,7 +39,7 @@ public class CustomerController {
 
     @PutMapping
     @ResponseStatus(HttpStatus.OK)
-    public ResultData<CustomerAllResponse> update(@Valid @RequestBody CustomerUpdateRequest customerUpdateRequest){
+    public ResultData<CustomersResponse> update(@Valid @RequestBody CustomerUpdateRequest customerUpdateRequest){
         return customerService.updateCustomer(customerUpdateRequest);
     }
 
@@ -56,7 +55,7 @@ public class CustomerController {
         return customerService.getByCustomerName(name);
     }
 
-    @GetMapping("/by-animal-list/{id}")
+    @GetMapping("/animal-list/{id}")
     public ResultData<List<AnimalResponse>> getByAnimalList(@PathVariable("id") long id){
         return customerService.getByAnimalList(id);
     }
@@ -65,7 +64,7 @@ public class CustomerController {
         return customerService.getOnlyId();
     }
     @GetMapping("/all-customer")
-    public ResultData<List<CustomerAllResponse>> getAllCustomer(){
+    public ResultData<List<CustomersResponse>> getAllCustomer(){
         return customerService.getAllCustomers();
     }
     @DeleteMapping("/name/{name}")

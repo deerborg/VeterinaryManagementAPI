@@ -1,14 +1,11 @@
 package art.dborg.vetapp.v1.dto.response.animal;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDate;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
+@Getter
+@Setter
 public class AnimalResponse {
     private String name; // Name of the animal
 

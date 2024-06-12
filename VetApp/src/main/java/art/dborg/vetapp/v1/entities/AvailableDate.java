@@ -2,19 +2,16 @@ package art.dborg.vetapp.v1.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
-@Data
 @Table(name = "availableDate")
-@AllArgsConstructor
-@NoArgsConstructor
+@Getter
+@Setter
 public class AvailableDate {
 
     @Id
@@ -33,4 +30,14 @@ public class AvailableDate {
     @OneToMany(mappedBy = "availableDate",cascade = {CascadeType.REMOVE,CascadeType.MERGE},fetch = FetchType.LAZY)
     @JsonIgnore
     private List<Appointment> appointments;
+
+    public AvailableDate() {
+    }
+
+    public AvailableDate(long id, LocalDate date, Doctor doctors, List<Appointment> appointments) {
+        this.id = id;
+        this.date = date;
+        this.doctors = doctors;
+        this.appointments = appointments;
+    }
 }

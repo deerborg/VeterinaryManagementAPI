@@ -2,15 +2,12 @@ package art.dborg.vetapp.v1.dto.request.availableDate;
 
 import art.dborg.vetapp.v1.entities.Doctor;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDate;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
+@Getter
+@Setter
 public class AvailableDateUpdateRequest {
     @NotNull(message = "ID cannot be null.")
     private long id; // ID of the available date to be updated
@@ -20,4 +17,13 @@ public class AvailableDateUpdateRequest {
 
     @NotNull(message = "Doctor ID cannot be null.")
     private Doctor doctors; // ID of the doctor for the available date
+
+    public AvailableDateUpdateRequest() {
+    }
+
+    public AvailableDateUpdateRequest(long id, LocalDate date, Doctor doctors) {
+        this.id = id;
+        this.date = date;
+        this.doctors = doctors;
+    }
 }

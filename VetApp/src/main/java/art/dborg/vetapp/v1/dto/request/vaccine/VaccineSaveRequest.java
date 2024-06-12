@@ -2,15 +2,12 @@ package art.dborg.vetapp.v1.dto.request.vaccine;
 
 import art.dborg.vetapp.v1.entities.Animal;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDate;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
+@Getter
+@Setter
 public class VaccineSaveRequest {
     @NotNull(message = "Vaccine name cannot be null.")
     private String name; // Name of the vaccine

@@ -2,15 +2,12 @@ package art.dborg.vetapp.v1.dto.request.vaccine;
 
 import art.dborg.vetapp.v1.entities.Animal;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDate;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
+@Getter
+@Setter
 public class VaccineUpdateRequest {
     @NotNull(message = "ID cannot be null.")
     private long id; // ID of the vaccine to be updated

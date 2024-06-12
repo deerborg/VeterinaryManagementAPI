@@ -1,4 +1,4 @@
-package art.dborg.vetapp.v1.service.concretes;
+package art.dborg.vetapp.v1.service.impl;
 
 import art.dborg.vetapp.v1.core.config.modelMapper.ModelMapperService;
 import art.dborg.vetapp.v1.core.result.Result;
@@ -6,10 +6,10 @@ import art.dborg.vetapp.v1.core.result.ResultData;
 import art.dborg.vetapp.v1.core.utilities.ResultHelper;
 import art.dborg.vetapp.v1.dto.request.doctor.DoctorSaveRequest;
 import art.dborg.vetapp.v1.dto.request.doctor.DoctorUpdateRequest;
-import art.dborg.vetapp.v1.dto.response.doctor.DoctorAllResponse;
+import art.dborg.vetapp.v1.dto.response.doctor.DoctorsResponse;
 import art.dborg.vetapp.v1.dto.response.doctor.DoctorOnlyIdResponse;
 import art.dborg.vetapp.v1.dto.response.doctor.DoctorResponse;
-import art.dborg.vetapp.v1.service.abstracts.DoctorService;
+import art.dborg.vetapp.v1.service.interfaces.DoctorService;
 import art.dborg.vetapp.v1.core.exception.ForUpdateNotFoundIdException;
 import art.dborg.vetapp.v1.core.exception.NotFoundException;
 import art.dborg.vetapp.v1.core.exception.NotUniqueValues;
@@ -22,9 +22,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * This class implements the DoctorService interface and provides methods for managing doctor entities.
- */
+
 @RequiredArgsConstructor
 @Service
 public class DoctorServiceImp implements DoctorService {
@@ -68,8 +66,8 @@ public class DoctorServiceImp implements DoctorService {
     }
 
     @Override
-    public ResultData<List<DoctorAllResponse>> getAllDoctor() {
-        return ResultHelper.OK(doctorRepository.findAll().stream().map(doctor -> mapperService.forResponse().map(doctor, DoctorAllResponse.class)).collect(Collectors.toList()));
+    public ResultData<List<DoctorsResponse>> getAllDoctor() {
+        return ResultHelper.OK(doctorRepository.findAll().stream().map(doctor -> mapperService.forResponse().map(doctor, DoctorsResponse.class)).collect(Collectors.toList()));
     }
 
     @Override

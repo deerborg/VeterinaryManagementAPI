@@ -1,16 +1,13 @@
 package art.dborg.vetapp.v1.dto.response.vaccine;
 
 import art.dborg.vetapp.v1.entities.Animal;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDate;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-public class VaccineGetAllResponse {
+@Getter
+@Setter
+public class VaccinesResponse {
     private String name; // Name of the vaccine
 
     private String code; // Code of the vaccine

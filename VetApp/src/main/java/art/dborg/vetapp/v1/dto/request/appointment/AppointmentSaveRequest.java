@@ -4,15 +4,12 @@ import art.dborg.vetapp.v1.entities.Animal;
 import art.dborg.vetapp.v1.entities.AvailableDate;
 import art.dborg.vetapp.v1.entities.Doctor;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
+@Getter
+@Setter
 public class AppointmentSaveRequest {
     @NotNull(message = "Animal ID cannot be null.")
     private Animal animal;
@@ -24,4 +21,14 @@ public class AppointmentSaveRequest {
     private LocalDateTime dateTime;
 
     private AvailableDate availableDate;
+
+    public AppointmentSaveRequest() {
+    }
+
+    public AppointmentSaveRequest(Animal animal, Doctor doctor, LocalDateTime dateTime, AvailableDate availableDate) {
+        this.animal = animal;
+        this.doctor = doctor;
+        this.dateTime = dateTime;
+        this.availableDate = availableDate;
+    }
 }

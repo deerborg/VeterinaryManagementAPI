@@ -10,8 +10,6 @@ import java.time.LocalDateTime;
 @Entity
 @Data
 @Table(name = "appointments")
-@AllArgsConstructor
-@NoArgsConstructor
 public class Appointment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,4 +30,15 @@ public class Appointment {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "appointment_available_date_id",referencedColumnName = "available_date_id")
     private AvailableDate availableDate;
+
+    public Appointment() {
+    }
+
+    public Appointment(long id, LocalDateTime dateTime, Doctor doctor, Animal animal, AvailableDate availableDate) {
+        this.id = id;
+        this.dateTime = dateTime;
+        this.doctor = doctor;
+        this.animal = animal;
+        this.availableDate = availableDate;
+    }
 }

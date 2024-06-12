@@ -1,15 +1,12 @@
 package art.dborg.vetapp.v1.dto.response.vaccine;
 
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDate;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
+@Getter
+@Setter
 public class VaccineResponse {
     private String name; // Name of the vaccine
 

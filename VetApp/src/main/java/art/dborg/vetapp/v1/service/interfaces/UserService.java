@@ -1,4 +1,4 @@
-package art.dborg.vetapp.v1.service.abstracts;
+package art.dborg.vetapp.v1.service.interfaces;
 
 import art.dborg.vetapp.v1.core.result.Result;
 import art.dborg.vetapp.v1.core.result.ResultData;

@@ -1,8 +1,7 @@
-package art.dborg.vetapp.v1.service.concretes;
+package art.dborg.vetapp.v1.service.impl;
 
 import art.dborg.vetapp.v1.core.config.modelMapper.ModelMapperService;
 import art.dborg.vetapp.v1.core.exception.NotFoundException;
-import art.dborg.vetapp.v1.core.exception.NotFoundUserPasswordOrUsername;
 import art.dborg.vetapp.v1.core.result.Result;
 import art.dborg.vetapp.v1.core.result.ResultData;
 import art.dborg.vetapp.v1.core.utilities.Message;
@@ -13,7 +12,7 @@ import art.dborg.vetapp.v1.dto.request.user.UserUpdateRequest;
 import art.dborg.vetapp.v1.dto.response.user.UserResponse;
 import art.dborg.vetapp.v1.entities.Role;
 import art.dborg.vetapp.v1.entities.User;
-import art.dborg.vetapp.v1.service.abstracts.UserService;
+import art.dborg.vetapp.v1.service.interfaces.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

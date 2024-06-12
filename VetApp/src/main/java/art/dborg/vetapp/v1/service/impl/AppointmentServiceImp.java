@@ -1,13 +1,13 @@
-package art.dborg.vetapp.v1.service.concretes;
+package art.dborg.vetapp.v1.service.impl;
 
 import art.dborg.vetapp.v1.core.config.modelMapper.ModelMapperService;
 import art.dborg.vetapp.v1.core.result.ResultData;
 import art.dborg.vetapp.v1.core.utilities.ResultHelper;
 import art.dborg.vetapp.v1.dto.request.appointment.AppointmentSaveRequest;
 import art.dborg.vetapp.v1.dto.request.appointment.AppointmentUpdateRequest;
-import art.dborg.vetapp.v1.dto.response.appointment.AppointmentGetAllResponse;
+import art.dborg.vetapp.v1.dto.response.appointment.AppointmentsResponse;
 import art.dborg.vetapp.v1.dto.response.appointment.AppointmentResponse;
-import art.dborg.vetapp.v1.service.abstracts.AppointmentService;
+import art.dborg.vetapp.v1.service.interfaces.AppointmentService;
 import art.dborg.vetapp.v1.core.exception.*;
 import art.dborg.vetapp.v1.core.utilities.Message;
 import art.dborg.vetapp.v1.dao.AnimalRepository;
@@ -70,8 +70,8 @@ public class AppointmentServiceImp implements AppointmentService {
     }
 
     @Override
-    public ResultData<AppointmentGetAllResponse> getByAppointmentsId(long id) {
-        return ResultHelper.OK(mapperService.forResponse().map(appointmentRepository.findById(id).orElseThrow(), AppointmentGetAllResponse.class));
+    public ResultData<AppointmentsResponse> getByAppointmentsId(long id) {
+        return ResultHelper.OK(mapperService.forResponse().map(appointmentRepository.findById(id).orElseThrow(), AppointmentsResponse.class));
     }
 
     @Override
@@ -81,7 +81,7 @@ public class AppointmentServiceImp implements AppointmentService {
     }
 
     @Override
-    public ResultData<List<AppointmentGetAllResponse>> filterDateTimeAndDoctor(LocalDateTime startDate, LocalDateTime endDate, Doctor doctor) { // Section 20 - filter by doctor id and date
+    public ResultData<List<AppointmentsResponse>> filterDateTimeAndDoctor(LocalDateTime startDate, LocalDateTime endDate, Doctor doctor) { // Section 20 - filter by doctor id and date
         if (doctorRepository.findById(doctor.getId()).isEmpty()) {
             throw new NotFoundDoctorException(Message.NOT_FOUND_DOCTOR);
         }
@@ -89,11 +89,11 @@ public class AppointmentServiceImp implements AppointmentService {
             throw new NotFoundAppointment(Message.NOT_FOUND_APPOINTMENT);
         }
         Doctor doctor1 = doctorRepository.findById(doctor.getId()).orElseThrow();
-        return ResultHelper.OK(appointmentRepository.findByDateTimeBetweenAndDoctor(startDate,endDate,doctor1).stream().map(appointment -> mapperService.forResponse().map(appointment,AppointmentGetAllResponse.class)).collect(Collectors.toList()));
+        return ResultHelper.OK(appointmentRepository.findByDateTimeBetweenAndDoctor(startDate,endDate,doctor1).stream().map(appointment -> mapperService.forResponse().map(appointment, AppointmentsResponse.class)).collect(Collectors.toList()));
     }
 
     @Override
-    public ResultData<List<AppointmentGetAllResponse>> filterDateTimeAndAnimal(LocalDateTime startDate, LocalDateTime endDate, Animal animal) { // Section 20 - filter by animal id and date
+    public ResultData<List<AppointmentsResponse>> filterDateTimeAndAnimal(LocalDateTime startDate, LocalDateTime endDate, Animal animal) { // Section 20 - filter by animal id and date
         if (animalRepository.findById(animal.getId()).isEmpty()) {
             throw new NotFoundAnimalException(Message.NOT_FOUND_ANIMAL);
         }
@@ -101,6 +101,6 @@ public class AppointmentServiceImp implements AppointmentService {
             throw new NotFoundAppointment(Message.NOT_FOUND_APPOINTMENT);
         }
         Animal animal1 = animalRepository.findById(animal.getId()).orElseThrow();
-        return ResultHelper.OK(appointmentRepository.findByDateTimeBetweenAndAnimal(startDate,endDate,animal1).stream().map(appointment -> mapperService.forResponse().map(appointment,AppointmentGetAllResponse.class)).collect(Collectors.toList()));
+        return ResultHelper.OK(appointmentRepository.findByDateTimeBetweenAndAnimal(startDate,endDate,animal1).stream().map(appointment -> mapperService.forResponse().map(appointment, AppointmentsResponse.class)).collect(Collectors.toList()));
     }
 }

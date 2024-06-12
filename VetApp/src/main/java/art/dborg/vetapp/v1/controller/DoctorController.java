@@ -1,16 +1,14 @@
 package art.dborg.vetapp.v1.controller;
 
-import art.dborg.vetapp.v1.dto.response.doctor.DoctorAllResponse;
+import art.dborg.vetapp.v1.dto.response.doctor.DoctorsResponse;
 import art.dborg.vetapp.v1.dto.response.doctor.DoctorOnlyIdResponse;
-import art.dborg.vetapp.v1.service.abstracts.DoctorService;
+import art.dborg.vetapp.v1.service.interfaces.DoctorService;
 import art.dborg.vetapp.v1.core.result.Result;
 import art.dborg.vetapp.v1.core.result.ResultData;
-import art.dborg.vetapp.v1.core.config.modelMapper.ModelMapperService;
 import art.dborg.vetapp.v1.core.utilities.ResultHelper;
 import art.dborg.vetapp.v1.dto.request.doctor.DoctorSaveRequest;
 import art.dborg.vetapp.v1.dto.request.doctor.DoctorUpdateRequest;
 import art.dborg.vetapp.v1.dto.response.doctor.DoctorResponse;
-import art.dborg.vetapp.v1.entities.Doctor;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -51,7 +49,7 @@ public class DoctorController {
         return ResultHelper.OK(doctorService.delete(id));
     }
     @GetMapping("/all-doctor")
-    public ResultData<List<DoctorAllResponse>> getAllDoctor(){
+    public ResultData<List<DoctorsResponse>> getAllDoctor(){
         return doctorService.getAllDoctor();
     }
     @DeleteMapping("/name/{name}")

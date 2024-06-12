@@ -1,18 +1,14 @@
 package art.dborg.vetapp.v1.controller;
 
-import art.dborg.vetapp.v1.service.abstracts.AnimalService;
-import art.dborg.vetapp.v1.service.abstracts.AppointmentService;
-import art.dborg.vetapp.v1.service.abstracts.DoctorService;
+import art.dborg.vetapp.v1.service.interfaces.AppointmentService;
 import art.dborg.vetapp.v1.core.result.Result;
 import art.dborg.vetapp.v1.core.result.ResultData;
-import art.dborg.vetapp.v1.core.config.modelMapper.ModelMapperService;
 import art.dborg.vetapp.v1.core.utilities.ResultHelper;
 import art.dborg.vetapp.v1.dto.request.appointment.AppointmentSaveRequest;
 import art.dborg.vetapp.v1.dto.request.appointment.AppointmentUpdateRequest;
-import art.dborg.vetapp.v1.dto.response.appointment.AppointmentGetAllResponse;
+import art.dborg.vetapp.v1.dto.response.appointment.AppointmentsResponse;
 import art.dborg.vetapp.v1.dto.response.appointment.AppointmentResponse;
 import art.dborg.vetapp.v1.entities.Animal;
-import art.dborg.vetapp.v1.entities.Appointment;
 import art.dborg.vetapp.v1.entities.Doctor;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +18,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Controller class for managing appointments.
@@ -48,7 +43,7 @@ public class AppointmentController {
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public ResultData<AppointmentGetAllResponse> getId(@PathVariable("id") long id){
+    public ResultData<AppointmentsResponse> getId(@PathVariable("id") long id){
         return appointmentService.getByAppointmentsId(id);
     }
 
@@ -59,16 +54,16 @@ public class AppointmentController {
     }
 
     @GetMapping("/appointments-date-doctor")
-    public ResultData<List<AppointmentGetAllResponse>> filterDateTimeAndDoctor(@RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startDate,
-                                                                               @RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endDate,
-                                                                               @RequestParam("doctorId") Doctor id){
+    public ResultData<List<AppointmentsResponse>> filterDateTimeAndDoctor(@RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startDate,
+                                                                          @RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endDate,
+                                                                          @RequestParam("doctorId") Doctor id){
         return appointmentService.filterDateTimeAndDoctor(startDate,endDate,id);
     }
 
     @GetMapping("/appointments-date-animal")
-    public ResultData<List<AppointmentGetAllResponse>> filterDateTimeAndAnimal(@RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startDate,
-                                                                               @RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endDate,
-                                                                               @RequestParam("animalId") Animal id){
+    public ResultData<List<AppointmentsResponse>> filterDateTimeAndAnimal(@RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startDate,
+                                                                          @RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endDate,
+                                                                          @RequestParam("animalId") Animal id){
 
         return appointmentService.filterDateTimeAndAnimal(startDate,endDate,id);
     }

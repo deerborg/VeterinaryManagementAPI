@@ -12,8 +12,6 @@ import java.util.List;
 @Entity
 @Data
 @Table(name = "vaccines")
-@AllArgsConstructor
-@NoArgsConstructor
 public class Vaccine {
 
     @Id
@@ -38,4 +36,16 @@ public class Vaccine {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "vaccine_animal_id",referencedColumnName = "animal_id")
     private Animal animal;
+
+    public Vaccine() {
+    }
+
+    public Vaccine(long id, String name, String code, LocalDate startDate, LocalDate endDate, Animal animal) {
+        this.id = id;
+        this.name = name;
+        this.code = code;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.animal = animal;
+    }
 }

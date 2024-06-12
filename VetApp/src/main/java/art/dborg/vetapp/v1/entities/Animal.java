@@ -12,8 +12,6 @@ import java.util.List;
 @Entity
 @Data
 @Table(name = "animals")
-@AllArgsConstructor
-@NoArgsConstructor
 public class Animal {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -53,4 +51,21 @@ public class Animal {
     @OneToMany(mappedBy = "animal", cascade = CascadeType.REMOVE)
     @JsonIgnore
     private List<Appointment> appointments;
+
+    public Animal() {
+    }
+
+    public Animal(long id, String name, String species, String breed, String gender, String colour, LocalDate dateOfBirth, Integer age, Customer customer, List<Vaccine> vaccines, List<Appointment> appointments) {
+        this.id = id;
+        this.name = name;
+        this.species = species;
+        this.breed = breed;
+        this.gender = gender;
+        this.colour = colour;
+        this.dateOfBirth = dateOfBirth;
+        this.age = age;
+        this.customer = customer;
+        this.vaccines = vaccines;
+        this.appointments = appointments;
+    }
 }

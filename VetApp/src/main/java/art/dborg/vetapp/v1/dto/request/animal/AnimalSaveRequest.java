@@ -2,15 +2,12 @@ package art.dborg.vetapp.v1.dto.request.animal;
 
 import art.dborg.vetapp.v1.entities.Customer;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDate;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
+@Getter
+@Setter
 public class AnimalSaveRequest {
     @NotNull(message = "Animal name cannot be null.")
     private String name; // Name of the animal
@@ -34,4 +31,18 @@ public class AnimalSaveRequest {
 
     @NotNull(message = "Animal customer ID cannot be null.")
     private Customer customer; // ID of the customer who owns the animal
+
+    public AnimalSaveRequest() {
+    }
+
+    public AnimalSaveRequest(String name, String species, String breed, String gender, String colour, LocalDate dateOfBirth, Integer age, Customer customer) {
+        this.name = name;
+        this.species = species;
+        this.breed = breed;
+        this.gender = gender;
+        this.colour = colour;
+        this.dateOfBirth = dateOfBirth;
+        this.age = age;
+        this.customer = customer;
+    }
 }

@@ -1,13 +1,13 @@
-package art.dborg.vetapp.v1.service.concretes;
+package art.dborg.vetapp.v1.service.impl;
 
 import art.dborg.vetapp.v1.core.config.modelMapper.ModelMapperService;
 import art.dborg.vetapp.v1.core.result.ResultData;
 import art.dborg.vetapp.v1.core.utilities.ResultHelper;
 import art.dborg.vetapp.v1.dto.request.availableDate.AvailableDateSaveRequest;
 import art.dborg.vetapp.v1.dto.request.availableDate.AvailableDateUpdateRequest;
-import art.dborg.vetapp.v1.dto.response.availableDate.AvailableDateGetAllResponse;
+import art.dborg.vetapp.v1.dto.response.availableDate.AvailableDatesResponse;
 import art.dborg.vetapp.v1.dto.response.availableDate.AvailableDateResponse;
-import art.dborg.vetapp.v1.service.abstracts.AvailableDateService;
+import art.dborg.vetapp.v1.service.interfaces.AvailableDateService;
 import art.dborg.vetapp.v1.core.exception.AppointmentAlreadyExists;
 import art.dborg.vetapp.v1.core.exception.NotFoundDoctorException;
 import art.dborg.vetapp.v1.core.exception.NotFoundException;
@@ -18,7 +18,6 @@ import art.dborg.vetapp.v1.dao.AvailableRepository;
 import art.dborg.vetapp.v1.dao.DoctorRepository;
 import art.dborg.vetapp.v1.entities.AvailableDate;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 
@@ -57,8 +56,8 @@ public class AvailableDateServiceImp implements AvailableDateService {
     }
 
     @Override
-    public ResultData<AvailableDateGetAllResponse> getByAvailableId(long id) {
-        return ResultHelper.OK(mapperService.forResponse().map(availableRepository.findById(id).orElseThrow(()-> new NotFoundException(Message.NOT_FOUND_ID)),AvailableDateGetAllResponse.class));
+    public ResultData<AvailableDatesResponse> getByAvailableId(long id) {
+        return ResultHelper.OK(mapperService.forResponse().map(availableRepository.findById(id).orElseThrow(()-> new NotFoundException(Message.NOT_FOUND_ID)), AvailableDatesResponse.class));
     }
 
     @Override

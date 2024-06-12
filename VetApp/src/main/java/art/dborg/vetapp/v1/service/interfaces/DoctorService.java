@@ -1,14 +1,10 @@
-package art.dborg.vetapp.v1.service.abstracts;
+package art.dborg.vetapp.v1.service.interfaces;
 
 import art.dborg.vetapp.v1.core.result.Result;
 import art.dborg.vetapp.v1.core.result.ResultData;
 import art.dborg.vetapp.v1.dto.request.doctor.DoctorSaveRequest;
 import art.dborg.vetapp.v1.dto.request.doctor.DoctorUpdateRequest;
-import art.dborg.vetapp.v1.dto.response.animal.AnimalResponse;
-import art.dborg.vetapp.v1.dto.response.customer.CustomerAllResponse;
-import art.dborg.vetapp.v1.dto.response.customer.CustomerOnlyIdResponse;
-import art.dborg.vetapp.v1.dto.response.customer.CustomerResponse;
-import art.dborg.vetapp.v1.dto.response.doctor.DoctorAllResponse;
+import art.dborg.vetapp.v1.dto.response.doctor.DoctorsResponse;
 import art.dborg.vetapp.v1.dto.response.doctor.DoctorOnlyIdResponse;
 import art.dborg.vetapp.v1.dto.response.doctor.DoctorResponse;
 
@@ -27,7 +23,7 @@ public interface DoctorService {
 
     ResultData <List<DoctorOnlyIdResponse>> getOnlyId();
 
-    ResultData<List<DoctorAllResponse>> getAllDoctor();
+    ResultData<List<DoctorsResponse>> getAllDoctor();
 
     Result deleteByName(String name);
 

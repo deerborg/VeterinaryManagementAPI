@@ -1,17 +1,16 @@
-package art.dborg.vetapp.v1.service.concretes;
+package art.dborg.vetapp.v1.service.impl;
 
 import art.dborg.vetapp.v1.core.config.modelMapper.ModelMapperService;
-import art.dborg.vetapp.v1.core.result.Result;
 import art.dborg.vetapp.v1.core.result.ResultData;
 import art.dborg.vetapp.v1.core.utilities.ResultHelper;
 import art.dborg.vetapp.v1.dto.request.animal.AnimalNameUpdateRequest;
 import art.dborg.vetapp.v1.dto.request.animal.AnimalSaveRequest;
 import art.dborg.vetapp.v1.dto.request.animal.AnimalUpdateRequest;
-import art.dborg.vetapp.v1.dto.response.animal.AnimalGetAllResponse;
+import art.dborg.vetapp.v1.dto.response.animal.AnimalsResponse;
 import art.dborg.vetapp.v1.dto.response.animal.AnimalListResponse;
 import art.dborg.vetapp.v1.dto.response.animal.AnimalOnlyIdResponse;
 import art.dborg.vetapp.v1.dto.response.animal.AnimalResponse;
-import art.dborg.vetapp.v1.service.abstracts.AnimalService;
+import art.dborg.vetapp.v1.service.interfaces.AnimalService;
 import art.dborg.vetapp.v1.core.exception.ForUpdateNotFoundIdException;
 import art.dborg.vetapp.v1.core.exception.NotFoundObjectRequest;
 import art.dborg.vetapp.v1.core.exception.NotFoundCustomerException;
@@ -54,34 +53,34 @@ public class AnimalServiceImp implements AnimalService {
 
 
     @Override
-    public ResultData<AnimalGetAllResponse> getAnimalById(long id) {
-        return ResultHelper.OK(mapperService.forResponse().map(animalRepository.findById(id).orElseThrow(() -> new NotFoundException(Message.NOT_FOUND_ID)),AnimalGetAllResponse.class));
+    public ResultData<AnimalsResponse> getAnimalById(long id) {
+        return ResultHelper.OK(mapperService.forResponse().map(animalRepository.findById(id).orElseThrow(() -> new NotFoundException(Message.NOT_FOUND_ID)), AnimalsResponse.class));
     }
 
 
     @Override
-    public ResultData<List<AnimalGetAllResponse>> getCustomerById(long animalCustomerId) {
+    public ResultData<List<AnimalsResponse>> getCustomerById(long animalCustomerId) {
         if(animalRepository.findByCustomer_Id(animalCustomerId).isEmpty()){
             throw new NotFoundCustomerException(Message.NOT_FOUND_CUSTOMER);
         }
-        return ResultHelper.OK(animalRepository.findByCustomer_Id(animalCustomerId).stream().map(animal -> mapperService.forResponse().map(animal,AnimalGetAllResponse.class)).collect(Collectors.toList()));
+        return ResultHelper.OK(animalRepository.findByCustomer_Id(animalCustomerId).stream().map(animal -> mapperService.forResponse().map(animal, AnimalsResponse.class)).collect(Collectors.toList()));
     }
 
 
     @Override
-    public ResultData<List<AnimalGetAllResponse>> getAnimalByName(String name) { // Section 13 - filter by name
+    public ResultData<List<AnimalsResponse>> getAnimalByName(String name) { // Section 13 - filter by name
         if(animalRepository.findByName(name).isEmpty()){
             throw new NotFoundObjectRequest(Message.NOT_FOUND);
         }
-        return ResultHelper.OK(animalRepository.findByName(name).stream().map(animal -> mapperService.forResponse().map(animal,AnimalGetAllResponse.class)).collect(Collectors.toList()));
+        return ResultHelper.OK(animalRepository.findByName(name).stream().map(animal -> mapperService.forResponse().map(animal, AnimalsResponse.class)).collect(Collectors.toList()));
     }
 
     @Override
-    public ResultData<List<AnimalGetAllResponse>> getCustomerByName(String name) {
+    public ResultData<List<AnimalsResponse>> getCustomerByName(String name) {
         if(animalRepository.findByCustomerName(name).isEmpty()){
             throw new NotFoundObjectRequest(Message.NOT_FOUND);
         }
-        return ResultHelper.OK(animalRepository.findByCustomerName(name).stream().map(animal -> mapperService.forResponse().map(animal,AnimalGetAllResponse.class)).collect(Collectors.toList()));
+        return ResultHelper.OK(animalRepository.findByCustomerName(name).stream().map(animal -> mapperService.forResponse().map(animal, AnimalsResponse.class)).collect(Collectors.toList()));
     }
 
 

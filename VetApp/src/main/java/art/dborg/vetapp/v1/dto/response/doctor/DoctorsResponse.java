@@ -7,9 +7,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
-public class DoctorAllResponse {
+public class DoctorsResponse {
     private Long id;
     private String name;
     private String mail;

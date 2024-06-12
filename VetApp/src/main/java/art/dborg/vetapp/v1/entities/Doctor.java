@@ -2,17 +2,14 @@ package art.dborg.vetapp.v1.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 
 @Entity
-@Data
 @Table(name = "doctors")
-@AllArgsConstructor
-@NoArgsConstructor
+@Getter
+@Setter
 public class Doctor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,4 +38,18 @@ public class Doctor {
     @OneToMany(mappedBy = "doctors", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     @JsonIgnore
     private List<AvailableDate> availableDates;
+
+    public Doctor() {
+    }
+
+    public Doctor(long id, String name, String phone, String mail, String address, String city, List<Appointment> appointments, List<AvailableDate> availableDates) {
+        this.id = id;
+        this.name = name;
+        this.phone = phone;
+        this.mail = mail;
+        this.address = address;
+        this.city = city;
+        this.appointments = appointments;
+        this.availableDates = availableDates;
+    }
 }

@@ -2,13 +2,10 @@ package art.dborg.vetapp.v1.dto.request.doctor;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
+@Getter
+@Setter
 public class DoctorSaveRequest {
     @NotNull(message = "Doctor name cannot be null.")
     private String name; // Name of the doctor

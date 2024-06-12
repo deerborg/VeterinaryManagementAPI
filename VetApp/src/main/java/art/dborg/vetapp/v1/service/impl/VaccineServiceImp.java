@@ -1,13 +1,13 @@
-package art.dborg.vetapp.v1.service.concretes;
+package art.dborg.vetapp.v1.service.impl;
 
 import art.dborg.vetapp.v1.core.config.modelMapper.ModelMapperService;
 import art.dborg.vetapp.v1.core.result.ResultData;
 import art.dborg.vetapp.v1.core.utilities.ResultHelper;
 import art.dborg.vetapp.v1.dto.request.vaccine.VaccineSaveRequest;
 import art.dborg.vetapp.v1.dto.request.vaccine.VaccineUpdateRequest;
-import art.dborg.vetapp.v1.dto.response.vaccine.VaccineGetAllResponse;
+import art.dborg.vetapp.v1.dto.response.vaccine.VaccinesResponse;
 import art.dborg.vetapp.v1.dto.response.vaccine.VaccineResponse;
-import art.dborg.vetapp.v1.service.abstracts.VaccineService;
+import art.dborg.vetapp.v1.service.interfaces.VaccineService;
 import art.dborg.vetapp.v1.core.exception.*;
 import art.dborg.vetapp.v1.core.utilities.Message;
 import art.dborg.vetapp.v1.dao.AnimalRepository;
@@ -49,8 +49,8 @@ public class VaccineServiceImp implements VaccineService {
     }
 
     @Override
-    public ResultData<VaccineGetAllResponse> getVaccineById(long id) {
-        return ResultHelper.OK(mapperService.forResponse().map(vaccineRepository.findById(id).orElseThrow(()-> new NotFoundException(Message.NOT_FOUND_ID)), VaccineGetAllResponse.class));
+    public ResultData<VaccinesResponse> getVaccineById(long id) {
+        return ResultHelper.OK(mapperService.forResponse().map(vaccineRepository.findById(id).orElseThrow(()-> new NotFoundException(Message.NOT_FOUND_ID)), VaccinesResponse.class));
     }
 
     @Override
@@ -87,23 +87,23 @@ public class VaccineServiceImp implements VaccineService {
     }
 
     @Override
-    public ResultData<List<VaccineGetAllResponse>> getAnimalVaccineList(long id) {
+    public ResultData<List<VaccinesResponse>> getAnimalVaccineList(long id) {
         if (vaccineRepository.findByAnimal_Id(id).isEmpty()) {
             throw new NotFoundAnimalException(Message.NOT_FOUND_ANIMAL);
         }
-        return ResultHelper.OK(vaccineRepository.findByAnimal_Id(id).stream().map(vaccine -> mapperService.forResponse().map(vaccine, VaccineGetAllResponse.class)).collect(Collectors.toList()));
+        return ResultHelper.OK(vaccineRepository.findByAnimal_Id(id).stream().map(vaccine -> mapperService.forResponse().map(vaccine, VaccinesResponse.class)).collect(Collectors.toList()));
     }
 
     @Override
-    public ResultData<List<VaccineGetAllResponse>> getFilterByStartAndEndDate(LocalDate firstDate,LocalDate endDate) {
+    public ResultData<List<VaccinesResponse>> getFilterByStartAndEndDate(LocalDate firstDate, LocalDate endDate) {
         if (vaccineRepository.findByEndDateBetween(firstDate,endDate).isEmpty()) {
             throw new NotFoundObjectRequest(Message.NOT_FOUND);
         }
-        return ResultHelper.OK(vaccineRepository.findByEndDateBetween(firstDate, endDate).stream().map(vaccine -> mapperService.forResponse().map(vaccine, VaccineGetAllResponse.class)).collect(Collectors.toList()));
+        return ResultHelper.OK(vaccineRepository.findByEndDateBetween(firstDate, endDate).stream().map(vaccine -> mapperService.forResponse().map(vaccine, VaccinesResponse.class)).collect(Collectors.toList()));
     }
 
     @Override
-    public ResultData<List<VaccineGetAllResponse>> getAllVaccine() {
-        return ResultHelper.OK(vaccineRepository.findAll().stream().map(vaccine -> mapperService.forResponse().map(vaccine,VaccineGetAllResponse.class)).collect(Collectors.toList()));
+    public ResultData<List<VaccinesResponse>> getAllVaccine() {
+        return ResultHelper.OK(vaccineRepository.findAll().stream().map(vaccine -> mapperService.forResponse().map(vaccine, VaccinesResponse.class)).collect(Collectors.toList()));
     }
 }

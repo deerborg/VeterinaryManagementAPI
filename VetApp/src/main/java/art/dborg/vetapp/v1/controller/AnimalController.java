@@ -3,14 +3,13 @@ package art.dborg.vetapp.v1.controller;
 import art.dborg.vetapp.v1.dto.request.animal.AnimalNameUpdateRequest;
 import art.dborg.vetapp.v1.dto.response.animal.AnimalListResponse;
 import art.dborg.vetapp.v1.dto.response.animal.AnimalOnlyIdResponse;
-import art.dborg.vetapp.v1.service.abstracts.AnimalService;
+import art.dborg.vetapp.v1.service.interfaces.AnimalService;
 import art.dborg.vetapp.v1.core.result.Result;
 import art.dborg.vetapp.v1.core.result.ResultData;
-import art.dborg.vetapp.v1.core.config.modelMapper.ModelMapperService;
 import art.dborg.vetapp.v1.core.utilities.ResultHelper;
 import art.dborg.vetapp.v1.dto.request.animal.AnimalSaveRequest;
 import art.dborg.vetapp.v1.dto.request.animal.AnimalUpdateRequest;
-import art.dborg.vetapp.v1.dto.response.animal.AnimalGetAllResponse;
+import art.dborg.vetapp.v1.dto.response.animal.AnimalsResponse;
 import art.dborg.vetapp.v1.dto.response.animal.AnimalResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -29,7 +28,7 @@ public class AnimalController {
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public ResultData<AnimalGetAllResponse> getAnimalById(@PathVariable("id") long id) {
+    public ResultData<AnimalsResponse> getAnimalById(@PathVariable("id") long id) {
         return animalService.getAnimalById(id);
     }
 
@@ -45,22 +44,22 @@ public class AnimalController {
        return animalService.updateAnimal(animalUpdateRequest);
     }
 
-    @GetMapping("/by-customer-id/{id}")
+    @GetMapping("/customer-id/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public ResultData<List<AnimalGetAllResponse>> getCustomerById(@PathVariable("id") long id) {
+    public ResultData<List<AnimalsResponse>> getCustomerById(@PathVariable("id") long id) {
         return animalService.getCustomerById(id);
     }
 
 
-    @GetMapping("/by-name")
+    @GetMapping("/name")
     @ResponseStatus(HttpStatus.OK)
-    public ResultData<List<AnimalGetAllResponse>> getAnimalByName(@RequestParam String name) {
+    public ResultData<List<AnimalsResponse>> getAnimalByName(@RequestParam String name) {
         return animalService.getAnimalByName(name);
     }
 
-    @GetMapping("/by-customer-name")
+    @GetMapping("/customer-name")
     @ResponseStatus(HttpStatus.OK)
-    public ResultData<List<AnimalGetAllResponse>> getCustomerByName(@RequestParam String name) {
+    public ResultData<List<AnimalsResponse>> getCustomerByName(@RequestParam String name) {
         return animalService.getCustomerByName(name);
     }
 
@@ -70,7 +69,7 @@ public class AnimalController {
         return ResultHelper.DELETE(animalService.delete(id));
     }
 
-    @GetMapping("/all-animals")
+    @GetMapping("/animals")
     public ResultData<List<AnimalListResponse>> getAllAnimal(){
         return animalService.getAnimalList();
     }
@@ -78,7 +77,7 @@ public class AnimalController {
     public ResultData<AnimalListResponse> updateByAnimalName(@RequestBody AnimalNameUpdateRequest animal){
         return animalService.updateByAnimalName(animal);
     }
-    @GetMapping("/all-animals-id")
+    @GetMapping("/animals-id")
     public ResultData<List<AnimalOnlyIdResponse>> getAllAnimalsById(){
         return animalService.getAllIdByAnimals();
     }

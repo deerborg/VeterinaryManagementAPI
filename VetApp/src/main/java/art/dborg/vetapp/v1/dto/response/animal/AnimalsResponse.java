@@ -1,16 +1,13 @@
 package art.dborg.vetapp.v1.dto.response.animal;
 
 import art.dborg.vetapp.v1.entities.Customer;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDate;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-public class AnimalGetAllResponse {
+@Getter
+@Setter
+public class AnimalsResponse {
     private String name; // Name of the animal
 
     private String species; // Species of the animal
@@ -26,4 +23,5 @@ public class AnimalGetAllResponse {
     private Integer age;
 
     private Customer customer; // Customer who owns the animal
+
 }
