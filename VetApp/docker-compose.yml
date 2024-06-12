@@ -1,0 +1,15 @@
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: vetAppDB
+    ports:
+      - "5434:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1511
+      POSTGRES_DB: veterinary
+    volumes:
+      - postgres_data:/var/lib/postgresql/vetApp
+
+volumes:
+  postgres_data:
