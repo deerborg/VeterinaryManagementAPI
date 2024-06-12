@@ -4,8 +4,9 @@ document.addEventListener('DOMContentLoaded', function() {
         // Welcome sayfasına yönlendirme
         window.location.href = '/welcome';
     });
+
     // Go Add Animal butonunun tıklanma olayını dinleme
-    document.getElementById('goAddButton').addEventListener('click', function() {
+    document.getElementById('goAddAnimalButton').addEventListener('click', function() {
         // Animal sayfasına yönlendirme
         window.location.href = '/animal';
     });
@@ -37,7 +38,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 city: city, // Şehir bilgisi
             }),
         })
-            .then(response => response.json()) // Yanıtı JSON formatında parse eder
+            .then(response => {
+                if (!response.ok) {
+                    return response.json().then(err => {throw err});
+                }
+                return response.json();
+            }) // Yanıtı JSON formatında parse eder
             .then(data => {
                 console.log('Response:', data); // Başarılı yanıtı konsola yazdırır
                 if (!data.status) {
@@ -59,6 +65,8 @@ document.addEventListener('DOMContentLoaded', function() {
             .catch((error) => {
                 // Hata durumunda hatayı konsola yazdırır
                 console.error('Error:', error);
+                document.getElementById('error-message').innerText = 'An error occurred. Please try again.';
+                document.getElementById('error-message').style.display = 'block';
             });
     });
 
